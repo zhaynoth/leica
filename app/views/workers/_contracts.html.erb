@@ -1,0 +1,31 @@
+ <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+  <thead>
+  <tr>
+      <th>Contrato</th>
+      <th>Proyecto</th>
+      <th></th> 
+  </tr>
+  </thead>
+  <tbody id="contracts-worker-list">
+    <% @contract_workers.each do |cw| %>
+      <tr id = '<%= cw.id %>' >          
+          <td><%= cw.contract.nombre %></td>
+          <td><%= cw.contract.project.nombre %></td>
+          <td>
+              <%= form_tag(contract_remove_worker_path(cw),
+                method: :contract_remove, 
+                remote: :true, 
+                :"data-type" => :json,               
+                data: { confirm: 'Are you sure?' }, 
+                :class => 'btn btn-mini btn-danger',
+                :id => 'delete-contract') do %>
+
+                <%= submit_tag 'Quitar', :class=> 'btn btn-mini btn-danger' %>
+              <% end %>
+          </td>      
+          
+      
+      </tr>
+    <% end %>  
+  </tbody>
+</table>

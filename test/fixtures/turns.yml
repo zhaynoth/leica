@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  turno: MyString
+  contract_id: 1
+
+two:
+  turno: MyString
+  contract_id: 1

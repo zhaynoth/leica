@@ -1,0 +1,52 @@
+ <%= form_for(@worker,  :id => 'submit_worker') do |f| %>
+    <div class="span4">
+      <div class="field">
+        <%= f.label :nombre %>
+        <%= f.text_field :nombre %>
+      </div>
+      <div class="field">
+        <%= f.label :apellido %>
+        <%= f.text_field :apellido %>
+      </div>          
+      <div class="field">
+        <%= f.label :fotocheck %>
+        <%= f.text_field :fotocheck %>
+      </div>
+      <div class="field">
+        <%= f.label :cargo %>
+        <%= f.collection_select(:type_id, $cargo_types, :id, :valor) %>
+      </div>
+    </div>       
+    <div class='span4'>
+      <div class="field">
+        <%= f.label :telefono %>
+        <%= f.text_field :telefono %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.text_field :email, :type => 'email',
+        :"data-fv-emailaddress-message" => "Dirección de email no válida" %>
+       </div>  
+      <br/>
+      <%= f.submit :class => 'btn btn-primary btn-large' %>
+      <br/><br/>
+      <% if notice != nil %>
+        <div id="notice" class="alert alert-success">
+          <a href="#" class="close" data-dismiss="alert">×</a>
+          <i class="icon-ok-sign"></i>
+          <%= notice %>
+        </div>            
+      <% end  %> 
+
+      <% if @worker.errors.any? %>
+        <div id="error_explanation" class="alert alert-error">
+          <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+          <ul>
+          <% @worker.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>                    
+      <% end %>
+    </div>
+<% end %>

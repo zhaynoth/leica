@@ -1,0 +1,67 @@
+<div class='box'>
+<div class='box-content'>
+<div class='row-fluid'>
+    <div class='tabbable tabs-left'>
+        <div>
+            <h4 class="ajusted-title"><%= link_to '< Administrar Trabajadores', workers_path, :class=>'title-link-color' %></h4>
+            <hr class='title-line'></hr>
+        </div>   
+        <!--START TABS FOR ADMIN WORKER-->
+        <ul class='nav nav-tabs anchor-tab'>
+            <li class='active'>
+                <a data-toggle='tab' href='#lA'>
+                    <i class="icon-indent-left"></i>                                   
+                    Editar
+                </a>
+            </li>
+            
+            <li>
+                <a data-toggle='tab' href='#lC'>
+                    <i class="icon-indent-left"></i>                                    
+                    Contratos
+                </a>
+            </li>                            
+        </ul>
+        <!--END TABS FOR ADMIN WORKER-->
+        <!--START CONTENT FOR ADMIN WORKER-->
+        <div class='tab-content'>
+            <div class='tab-pane active' id='lA'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div> 
+                            <strong class='title'>EDITAR: <%= ' ' + @worker.nombre + ' ' + @worker.apellido %></strong>
+                            </div>    
+                        </div>
+                        <br/>
+                        <fieldset>                    
+                            <%= render 'form' %>
+                        </fieldset>  
+                    </div>
+                </div> 
+            </div>
+           
+            <div class='tab-pane' id='lC'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div> 
+                                <strong class='title'> 
+                                CONTRATOS DE: <%= ' ' + @worker.nombre + ' ' + @worker.apellido %>
+                                </strong>
+                            </div>    
+                        </div>
+                        <br/>
+                        <fieldset>
+                            <%= render 'addcontracts' %>        
+                            <%= render 'contracts' %>
+                        </fieldset>  
+                    </div>
+                </div>                               
+            </div>
+        </div>
+        <!--END CONTENT FOR ADMIN WORKER-->
+    </div>
+</div>
+</div>
+</div>

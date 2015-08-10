@@ -1,0 +1,46 @@
+<div class="row-fluid marg-top">
+	<div class="span4 box box-nomargin">
+		<div class="box-header green-background">
+			<div class="title"><i class="icon-pencil"></i> Atenciones</div>			
+		</div>
+		<div class="box-content">
+			<ul class="unstyled">
+			  <li class="nav-header">Registro de Atenciones</li>
+              <li><a href="#"> Soporte Diario Software</a></li>
+      		  <li><a href="#"> Soporte Diario Campo</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="span4 box box-nomargin">
+		<div class="box-header green-background">
+			<div class="title"><i class="icon-list-alt"></i> Reportes</div>		 	
+		</div>
+		<div class="box-content">
+			<ul class="unstyled">
+              <li class="nav-header">Peporte Atenciones</li>
+              <li><%= link_to 'Soporte Software', attentions_path %></li>
+      		  <li><a href="#"> Soporte Campo</a></li>      		  
+			</ul>
+		</div>
+	</div>	
+	<div class="span4 box box-nomargin">
+		<div class="box-header green-background">
+			<div class="title"><i class="icon-cogs"></i> Administrar</div>			
+		</div>
+		<div class="box-content">
+			<ul class="unstyled">
+              <li class="nav-header">Proyectos / Operaciones</li>              
+              <li><a href="#"> Nuevo Proyecto / Operacion</a></li>
+      		  <li><a href="#"> Contratos</a></li>
+      		  <hr class="hr-bottom">
+              <li class="nav-header">Trabajadores</li>
+  			  <li><%= link_to 'Registrar Trabajadores', workers_path %></li> 
+              <hr class="hr-bottom">
+              <li class="nav-header">Atenciones</li>
+              <li><a href="#"> Atenciones General</a></li>
+              <li><a href="#"> Atenciones Software</a></li>
+              <li><a href="#"> Atenciones Campo</a></li>
+			</ul>
+		</div>
+	</div>				
+</div>

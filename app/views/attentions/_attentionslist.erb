@@ -1,0 +1,49 @@
+<table class='data-table table table-bordered table-striped table-condensed out-margin'>
+  <thead>
+    <tr>
+      <th>Issue</th>
+      <th>Mina</th>
+      <th>Reported by </th>
+      <th>Equipment</th>
+      <th>Category</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Assigned to</th>
+      <th>Comment</th>
+      <th>Dateinc</th>
+      <th>Datefin</th>
+      <th>Workers</th>
+      <th>Hours</th>
+      <th>H.Hom</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attentions.each do |attention| %>
+      <tr>
+        <td>Issue</td>
+        <td><%= attention.contract_id %></td>
+        <td><%= attention.reportby %></td>
+        <th>Equipment</th>
+        <td>Category</td>
+        <td>Type</td>
+        <td><%= attention.type_id %></td>
+        <td>Priority</td>
+        <td>Assigned to</td>
+        <td>Comment</td>
+        <td><%= attention.dateinc %></td>
+        <td><%= attention.datefin %></td>
+        <td>Workers</td>
+        <td><%= attention.horas %></td>
+        <td><%= attention.horashombre %></td>
+        <td><%= link_to 'Show', attention %></td>
+        <td><%= link_to 'Edit', edit_attention_path(attention) %></td>
+        <td><%= link_to 'Destroy', attention, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+      

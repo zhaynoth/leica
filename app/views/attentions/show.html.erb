@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reportby:</strong>
+  <%= @attention.reportby %>
+</p>
+
+<p>
+  <strong>Dateinc:</strong>
+  <%= @attention.dateinc %>
+</p>
+
+<p>
+  <strong>Datefin:</strong>
+  <%= @attention.datefin %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @attention.type_id %>
+</p>
+
+<p>
+  <strong>Horas:</strong>
+  <%= @attention.horas %>
+</p>
+
+<p>
+  <strong>Horashombre:</strong>
+  <%= @attention.horashombre %>
+</p>
+
+<p>
+  <strong>Contract:</strong>
+  <%= @attention.contract_id %>
+</p>
+
+<%= link_to 'Edit', edit_attention_path(@attention) %> |
+<%= link_to 'Back', attentions_path %>

@@ -1,0 +1,2 @@
+module WorkercontractsHelper
+end

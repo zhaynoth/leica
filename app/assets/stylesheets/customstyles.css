@@ -1,0 +1,133 @@
+/*General Customization*/
+.full{
+	width: 1270px;
+	padding: 5px;
+}
+	@media (max-width: 1270px) {
+		.full {
+		    width: 98%;
+		} 
+	}
+
+.marg-top{
+	margin-top: 30px;
+}
+.marg_bottom{
+	margin-bottom: 0px;
+}
+.out-margin{
+	margin: 0px !important;
+}
+
+.title-link-color{
+	color: #397EAA;
+}
+.title-line{
+	border: 2px solid;
+	color: #0055A6;
+	width: 100%;
+	margin: 0px 0px 6px 0px;
+}
+.ajusted-title{
+	margin: 1px 3px 1px 3px;
+}
+
+.anchor-tab{
+	width: 160px;
+}
+
+/* Start form attentions*/
+.form-box{
+	font-size: 95%;
+	height: 22px !important;
+	margin: 0px 1px 1px 0px !important;
+	padding: 0px 3px 0px 3px !important;
+	line-height: 21px !important;
+	border: 1px solid;	
+}
+.form-label{
+	background-color: #49BF67;
+	color: #FFF;
+	border-color: #49BF67;
+}
+.form-input {
+	width: 94%;
+}
+.form-input-select{
+	width: 99%;
+	border-radius: 0px !important;
+	border-color: #D0D0D0 !important;
+	height: 24px !important;
+}
+/* end form attentions*/
+.records-size{
+	font-size: 82%;
+}
+/* Start attentions list*/
+
+
+
+#chosenForm .chosen-choices {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-height: 34px;
+    padding: 6px 12px;
+}
+#chosenForm .chosenContainer .form-control-feedback {
+    /* Adjust feedback icon position */
+    right: -15px;
+}
+
+
+
+
+/* end attentions list*/
+
+
+/*Header Customization*/
+.logo{
+	margin: 0px 0px 0px 0px;
+}
+.banner{
+	background-color: white;
+}
+.menu{
+	background-color: #0055A6;	
+}
+
+/*Content Customization*/
+
+.humb-encabezado{	
+	text-align:left;
+	background-color:#A4434A;
+	margin: 0px;
+	padding: 3px;
+	padding-left:15px;
+	margin-bottom: 7px;
+	border-radius: 5px;
+	color:#FFF;
+	font-family:"Candara";	
+}
+.humb-lista p {
+  margin:0px;
+  padding:0px;
+  font-size: 15px;
+}
+.humb-lista{
+	margin: 0px;
+	padding: 10px;	
+	font-family:"Candara";
+}
+
+/*Footer Customization */
+footer{
+	background-color: #3C3F40;
+    width: 100%;
+	color:#fff;
+	bottom: 0;
+    position: fixed; ;
+}
+footer p {
+	margin: 0px;
+    font-size: 10px;
+}

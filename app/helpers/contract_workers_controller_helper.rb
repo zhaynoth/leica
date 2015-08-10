@@ -1,0 +1,2 @@
+module ContractWorkersControllerHelper
+end

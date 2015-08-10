@@ -1,0 +1,27 @@
+<% if @worker.contract.count < Contract.count %>
+	<div class="span6"> 
+		<!-- options_from_collection_for_select(@unassigned_contracts,:id, :nombre) -->
+		<%= form_tag(contract_add_worker_path(@worker),
+			method: :contract_add, 
+			remote: :true, 
+			:"data-type" => :json,
+			:id => 'submit_contract') do %>
+
+			<strong>CONTRATO </strong>
+			<%= select_tag :contract, 
+					option_groups_from_collection_for_select(@projects, :contract, :nombre, :id, :nombre),
+					:class=> 'marg_bottom' %>
+			<%= submit_tag 'Asignar', :class=> 'btn btn-small btn-primary' %>
+		<% end %>
+	</div>
+	<div id="content-notice" class="span6">	
+		<!-- Place for notices -->
+	</div>
+<% else %>
+<div class="span6">	
+	<div id="bar-notice" class="alert alert-success">
+		<i class="icon-ok-sign"></i>
+	  <strong> <%= @worker.nombre + " " + @worker.apellido %> está asignado a todos los contratos</strong> 
+	</div>		
+</div>
+<% end %>

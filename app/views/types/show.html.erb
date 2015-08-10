@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Campo:</strong>
+  <%= @type.campo %>
+</p>
+
+<p>
+  <strong>Valor:</strong>
+  <%= @type.valor %>
+</p>
+
+<%= link_to 'Edit', edit_type_path(@type) %> |
+<%= link_to 'Back', types_path %>

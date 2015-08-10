@@ -1,0 +1,63 @@
+<div class='box'>        
+<div class='box-content'>
+<div class='row-fluid'>       
+    <div class='tabbable tabs-left'>
+        <div>            
+            <h4 class="ajusted-title"> Administrar Trabajadores</h4>
+            <hr class='title-line'></hr>
+        </div>                       
+        <!--START TABS FOR ADMIN WORKER-->
+        <ul class='nav nav-tabs anchor-tab'>
+            <li class='active'>
+                <a data-toggle='tab' href='#lA'>
+                    <i class="icon-indent-left"></i>                                   
+                    Trabjadores
+                </a>
+            </li>
+            
+            <li>
+                <a data-toggle='tab' href='#lC'>
+                    <i class="icon-indent-left"></i>                                    
+                    Nuevo Trabajador
+                </a>
+            </li>
+        </ul>
+        <!--END TABS FOR ADMIN WORKER-->
+        <!--START CONTENT FOR ADMIN WORKER-->
+        <div class='tab-content'>
+            <div class='tab-pane active' id='lA'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div class='title'><strong>TRABAJADORES</strong></div>                                    
+                        </div>
+                        <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area' style="height:680px">
+                            <%= render 'list' %>                         
+                            </div> 
+                        </div>
+                        </div>
+                    </div>
+                </div>                                
+            </div>
+           
+            <div class='tab-pane' id='lC'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div class='title'><strong>NUEVO TRABAJADOR</strong></div>
+                        </div>
+                        <br/>
+                        <fieldset>                    
+                            <%= render 'form' %>
+                        </fieldset>  
+                    </div>
+                </div>                                                             
+            </div>
+        </div>
+        <!--END CONTENT FOR ADMIN WORKER-->
+    </div>             
+</div>
+</div>
+</div>
