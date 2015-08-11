@@ -3755,7 +3755,7 @@ a, a:hover, .btn-link, .btn-link:hover {
 .btn, .btn-group > .btn:first-child, .btn-group > .btn:last-child, .btn-group > .dropdown-toggle {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
-  border-radius: 5px !important; }
+  border-radius: 0px !important; }
 
 .well, .nav-pills > li > a, .navbar-inner, .breadcrumb, .nav-tabs > li > a, .tabs-left > .nav-tabs > li > a, .tabs-right > .nav-tabs > li > a, .tabs-left > .nav-tabs > li > a, .accordion-group,
 input[type="text"], input[type="password"], .ui-autocomplete-input, textarea, .uneditable-input, .modal, .tooltip .tooltip-inner,

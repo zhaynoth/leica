@@ -8,7 +8,6 @@ class AttentionsController < ApplicationController
   def index
   end
 
-
   # GET /attentions/1
   # GET /attentions/1.json
   def show
@@ -28,6 +27,7 @@ class AttentionsController < ApplicationController
     @projects = Project.all
     @attention = Attention.new(attention_params)
     @attention.participants = params[:participants]
+    @attention.responsible = params[:responsible]
 
     respond_to do |format|
       if @attention.save
@@ -72,7 +72,7 @@ class AttentionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attention_params 
-      params.require(:attention).permit(:reportby, :dateinc, :datefin, :type_id, :contract_id, :participants)
+      params.require(:attention).permit(:reportby, :dateinc, :datefin, :type_id, :contract_id, :participants, :responsible)
     end
 
     # EXTRA PRIVATE METHODS
@@ -82,8 +82,7 @@ class AttentionsController < ApplicationController
     def set_methods_for_form
       @attentions = Attention.all
       @attention = Attention.new
-      @projects = Project.all 
-
+      @projects = Project.all
       @workers = Worker.all    
     end
 

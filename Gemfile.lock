@@ -28,6 +28,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    bootstrap-multiselect-rails (0.9.9)
+      rails (>= 4.0.0)
     bootstrap3-datetimepicker-rails (4.15.35)
       momentjs-rails (>= 2.8.1)
     builder (3.2.2)
@@ -116,6 +118,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bootstrap-multiselect-rails
   bootstrap3-datetimepicker-rails (~> 4.15.35)
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)

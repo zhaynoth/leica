@@ -19,7 +19,7 @@ class Attention < ActiveRecord::Base
 
 	#METHODS
 	before_save :set_hours
-	after_create :save_participants
+	after_create :save_involved
 
 	def set_hours
 		seg = self.datefin - self.dateinc
@@ -29,11 +29,20 @@ class Attention < ActiveRecord::Base
 		self.horashombre = hh * 2
 	end
 
+	#save relationships with workers (save_involved)
 	def participants=(value)
 		@participants = value
 	end
 
-	def save_participants
+	def responsible=(value)
+		@responsible = value
+	end
+
+	def save_involved
+		#save responsible worker
+		Involved.create(worker_id: @responsible, attention_id: self.id, rol: "responsable" )
+
+		#save participants worker
 		@participants.each do |p|
 			Involved.create(worker_id: p, attention_id: self.id, rol: "participante" )
 		end

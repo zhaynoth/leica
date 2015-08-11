@@ -11,7 +11,8 @@
               </div>
               <div class="span3 out-margin">
                 <%= f.select :contract_id, 
-                    option_groups_from_collection_for_select(@projects, :contract, :nombre, :id, :nombre), {},{:class => "form-box form-input-select"}%>
+                    option_groups_from_collection_for_select(@projects, :contract, :nombre, :id, :nombre),
+                    {},{:class => "form-box form-input-select"}%>
               </div>
           </div>
           <div class="span1">
@@ -20,7 +21,7 @@
       </div>
     </div>
     <div class="row-fluid">
-      <div class="span9 out-margin form-size">
+      <div class="span9 form-size">
         <div class="span2 out-margin">     
           <%= f.label :reportby,  "Reported by", :class => 'form-box form-label' %>
           <%= f.text_field :reportby, :class => 'form-box form-input' %>
@@ -45,15 +46,20 @@
         </div>
       </div>
     </div>
-    <!--     Relationships -->
+    <!-- Relationships -->
     <div class="row-fluid">
-      <div class="span9 form-size">
-        <div class="span4 out-margin">     
-          <%= label_tag :simbol,  "Workers", :class => 'form-box form-label' %>
-          <% @workers.each do |w| %>
-            <div class="field"></div>
-            <%= check_box_tag "participants[]", w.id %><%= w.nombre+ ", " + w.apellido%>
-          <% end %>  
+      <div class="span12 form-size">
+        <div class="span1 out-margin">
+          <%= label_tag :simbol1,  "Assigned", :class => 'form-box form-label' %>
+        </div>
+        <div class="span2 out-margin">
+          <%= select_tag "responsible", options_from_collection_for_select(@workers, "id", "nombre" ), :class => "form-box form-input-select" %>
+        </div>
+        <div class="span1 out-margin">     
+          <%= label_tag :simbol2,  "Workers", :class => 'form-box form-label' %>
+        </div>
+        <div class="span4 out-margin">
+          <%= select_tag "participants[]", options_from_collection_for_select(@workers, "id", "nombre" ), multiple: true %>
         </div>
       </div>      
     </div>
@@ -82,3 +88,44 @@
     <% end %>
 
 <% end %>
+
+<script type="text/javascript">
+$(function () {
+    /*---Start DateTimePicker---*/
+     $('#attention_dateinc').datetimepicker({
+             icons: {
+                time: "icon-time",
+                date: "icon-calendar",
+                up: "icon-caret-up",
+                down: "icon-caret-down",
+                previous: 'icon-chevron-sign-left',
+                next: 'icon-chevron-sign-right'
+            }       
+        });
+
+        $('#attention_datefin').datetimepicker({
+            icons: {
+                time: "icon-time",
+                date: "icon-calendar",
+                up: "icon-caret-up",
+                down: "icon-caret-down",
+                previous: 'icon-chevron-sign-left',
+                next: 'icon-chevron-sign-right'
+            },   
+            useCurrent: false //Important! See issue #1075
+        });
+
+        $("#attention_dateinc").on("dp.change", function (e) {
+                $('#attention_datefin').data("DateTimePicker").minDate(e.date);
+        });
+
+        $("#attention_datefin").on("dp.change", function (e) {
+            $('#attention_dateinc').data("DateTimePicker").maxDate(e.date);
+        });
+    /*---End DateTimePicker---*/
+
+    /*---St Bootstrap Multiselect---*/
+        $('#participants_').multiselect();
+    /*---End Bootstrap Multiselect---*/   
+});
+</script>
