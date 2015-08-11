@@ -42,6 +42,8 @@ GEM
     coffee-script-source (1.9.1.1)
     erubis (2.7.0)
     execjs (2.5.2)
+    foreigner (1.7.4)
+      activerecord (>= 3.0.0)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.3.0)
@@ -121,6 +123,7 @@ DEPENDENCIES
   bootstrap-multiselect-rails
   bootstrap3-datetimepicker-rails (~> 4.15.35)
   coffee-rails (~> 4.0.0)
+  foreigner
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

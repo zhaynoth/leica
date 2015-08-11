@@ -7,5 +7,7 @@ class CreateInvolveds < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_foreign_key(:involveds, :workers, column: 'worker_id')
+    add_foreign_key(:involveds, :attentions, column: 'attention_id')
   end
 end

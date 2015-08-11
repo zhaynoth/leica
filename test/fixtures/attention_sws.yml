@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  issue: MyText
+  type: 1
+  priority: MyString
+  integer: MyString
+  comment: MyText
+  unity_id: 1
+
+two:
+  issue: MyText
+  type: 1
+  priority: MyString
+  integer: MyString
+  comment: MyText
+  unity_id: 1

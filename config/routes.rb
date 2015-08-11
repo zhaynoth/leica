@@ -1,5 +1,11 @@
 Rails.application.routes.draw do   
 
+  resources :attention_sws
+
+  resources :unities
+
+  resources :unity_subtypes
+
   resources :projects do
     resources :contracts
   end

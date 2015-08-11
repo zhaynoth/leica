@@ -1,0 +1,25 @@
+<%= form_for(@unity) do |f| %>
+  <% if @unity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@unity.errors.count, "error") %> prohibited this unity from being saved:</h2>
+
+      <ul>
+      <% @unity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :unity %><br>
+    <%= f.text_field :unity %>
+  </div>
+  <div class="field">
+    <%= f.label :unity_subtype_id %><br>
+    <%= f.number_field :unity_subtype_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

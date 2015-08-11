@@ -7,5 +7,7 @@ class CreateContractWorkers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_foreign_key(:contract_workers, :contracts, column: 'contract_id')
+    add_foreign_key(:contract_workers, :workers, column: 'worker_id')
   end
 end
