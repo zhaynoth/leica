@@ -28,6 +28,7 @@ class AttentionsController < ApplicationController
     @attention = Attention.new(attention_params)
     @attention.participants = params[:participants]
     @attention.responsible = params[:responsible]
+    @attention.nro_involved =  params[:participants].count + 1
 
     respond_to do |format|
       if @attention.save

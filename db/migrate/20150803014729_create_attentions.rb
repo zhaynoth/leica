@@ -5,8 +5,8 @@ class CreateAttentions < ActiveRecord::Migration
       t.datetime :dateinc
       t.datetime :datefin
       t.integer :type_id, index: true, foreign_key: true
-      t.integer :horas
-      t.integer :horashombre
+      t.float :horas
+      t.float :horashombre
       t.integer :contract_id, index: true, foreign_key: true
 
       t.timestamps
