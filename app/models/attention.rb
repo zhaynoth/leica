@@ -6,6 +6,7 @@ class Attention < ActiveRecord::Base
 	belongs_to :type
 	belongs_to :contract
 
+	has_one :swatenttion
 
 	#VALIDATIONS
 	validates_presence_of :reportby
@@ -14,8 +15,7 @@ class Attention < ActiveRecord::Base
 	validates_presence_of :type_id
 #	validates_presence_of :horas
 #	validates_presence_of :horashombre
-	validates_presence_of :contract_id 
-
+	validates_presence_of :contract_id
 
 	#METHODS
 	before_save :set_hours
@@ -45,9 +45,14 @@ class Attention < ActiveRecord::Base
 		Involved.create(worker_id: @responsible, attention_id: self.id, rol: "responsable" )
 
 		#save participants worker
-		@participants.each do |p|
+		if @participants != nil
+			@participants.each do |p|
 			Involved.create(worker_id: p, attention_id: self.id, rol: "participante" )
+			end
 		end
 	end
 
+	def attention_saved
+		@attention_saved = self
+	end
 end

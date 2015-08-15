@@ -1,7 +1,5 @@
 Rails.application.routes.draw do   
 
-  resources :attention_sws
-
   resources :unities
 
   resources :unity_subtypes
@@ -25,7 +23,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :attentions
+  resources :swatenttions do
+    resource :attentions
+  end
   
   resources :types 
   resources :guards  

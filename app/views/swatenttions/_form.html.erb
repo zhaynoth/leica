@@ -1,0 +1,172 @@
+<%= form_for(@swatenttion) do |f| %>
+    <div class="row-fluid">
+      <div class="span12 ">
+          <div class="span2">
+              <i class="icon-desktop"></i>
+              <strong>SOPORTE SOFTWARE</strong>
+          </div>
+          <div class="span5 out-margin">
+              <div class="span2 out-margin">        
+                <%= label_tag :contract_id, "MINA", :class => 'form-box form-label' %>
+              </div>
+              <div class="span5 out-margin">
+                <%= select_tag "attention[contract_id]", 
+                    option_groups_from_collection_for_select(@projects, :contract, :nombre, :id, :nombre), 
+                    :class => "form-box form-input-select"%>
+              </div>
+          </div>
+          <div class="span5 out-margin">
+              <div class="span2 out-margin">     
+                <%= label_tag :participants,  "Workers", :class => 'form-box form-label' %>
+              </div>
+              <div class="span9 out-margin">
+                <%= select_tag "attention[participants]", options_from_collection_for_select(@workers, "id", "nombre" ), multiple: true %>
+              </div>
+              <div class="span1">
+                <%= f.submit 'Añadir', :class=> 'btn btn-small btn-primary' %>
+              </div>
+          </div>
+          
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12 form-size">
+    
+        <div class="span2 out-margin">
+          <%= f.label :issue, "Issue", :class => 'link form-box form-label' %>
+          <%= f.text_area :issue, :class => 'form-txtarea form-input' %>
+        </div>  
+
+        <div class="span2 out-margin">     
+          <%= label_tag :reportby,  "Reported by", :class => 'form-box form-label' %>
+          <%= text_field_tag "attention[reportby]", :reportby, :class => 'form-box form-input' %>
+        </div>         
+
+        <div class="span1 out-margin">
+          <%= f.label :unity_id,"Equipment", :class => 'form-box form-label'  %>
+          <%= f.collection_select(:unity_id, $equipment, :id, :unity, {}, 
+              {:class => "form-box form-input-select"})  %>
+        </div> 
+
+        <div class="span1 out-margin">
+          <%= f.label :type_id, "Type", :class => 'form-box form-label' %>
+          <%= f.collection_select(:type_id, $swtype, :id, :valor, {}, 
+              {:class => "form-box form-input-select"})  %>      
+        </div> 
+        
+        <div class="span1 out-margin">
+          <%= label_tag :attention_type_id, "Status", :class => 'form-box form-label' %>      
+          <%= select_tag "attention[type_id]", options_from_collection_for_select($status, "id", "valor" ),
+          :class => "form-box form-input-select" %>
+        </div>
+
+        <div class="span1 out-margin">
+          <%= f.label :priority, "Priority", :class => 'form-box form-label'  %>    
+          <%= f.collection_select(:priority, $priority, :id, :valor, {}, 
+              {:class => "form-box form-input-select"})  %>
+        </div> 
+
+        <div class="span1 out-margin">
+          <%= label_tag :responsible,  "Assigned", :class => 'form-box form-label' %>
+          <%= select_tag "attention[responsible]", options_from_collection_for_select(@workers, "id", "nombre" ), 
+              :class => "form-box form-input-select" %>
+        </div>  
+
+        <div class="span2 out-margin">
+          <%= f.label :comment, "Comment", :class => 'form-box form-label'  %>
+          <%= f.text_area :comment, :class => 'form-txtarea form-input'  %>
+        </div>   
+        <div class="span3 out-margin">  
+          <div class="span6 ">     
+            <%= label_tag :dateinc, "Created", :class => 'form-box form-label' %>
+            <input id="attention_dateinc" name="attention[dateinc]" type='text' class="form-control form-box form-input"/>
+          </div>
+
+          <div class="span6 out-margin">     
+            <%= f.label :datefin, "Done", :class => 'form-box form-label' %>
+            <input id="attention_datefin" name="attention[datefin]" type='text' class="form-control form-box form-input"/>
+          </div>
+        </div>    
+      </div>
+    </div>
+    <% if notice != nil %>
+      <div id="notice" class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        <i class="icon-ok-sign"></i>
+        <%= notice %>
+      </div>            
+    <% end  %> 
+
+    <% if @swatenttion.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@swatenttion.errors.count, "error") %> prohibited this swatenttion from being saved:</h2>
+
+        <ul>
+        <% @swatenttion.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+<% end %>
+
+
+<script type="text/javascript">
+$(function () {
+    /*---Start DateTimePicker---*/
+     $('#attention_dateinc').datetimepicker({
+            format: 'MMM DD YYYY, h:mm',
+            icons: {
+                time: "icon-time",
+                date: "icon-calendar",
+                up: "icon-caret-up",
+                down: "icon-caret-down",
+                previous: 'icon-chevron-sign-left',
+                next: 'icon-chevron-sign-right'
+            }       
+        });
+
+        $('#attention_datefin').datetimepicker({
+            format: 'MMM DD YYYY, h:mm',
+            icons: {
+                time: "icon-time",
+                date: "icon-calendar",
+                up: "icon-caret-up",
+                down: "icon-caret-down",
+                previous: 'icon-chevron-sign-left',
+                next: 'icon-chevron-sign-right'
+            },   
+            useCurrent: false //Important! See issue #1075
+        });
+
+        $("#attention_dateinc").on("dp.change", function (e) {
+                $('#attention_datefin').data("DateTimePicker").minDate(e.date);
+        });
+
+        $("#attention_datefin").on("dp.change", function (e) {
+            $('#attention_dateinc').data("DateTimePicker").maxDate(e.date);
+        });
+    /*---End DateTimePicker---*/
+
+    /*---St Bootstrap Multiselect---*/
+        $('#attention_participants').multiselect({
+            maxHeight: 300
+        });
+
+        $('#swatenttion_unity_id').multiselect({
+            enableCaseInsensitiveFiltering: true,
+            maxHeight: 450
+        });
+
+   /*---End Bootstrap Multiselect---*/   
+
+});  
+ 
+
+</script>
+
+
+
+

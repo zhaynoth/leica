@@ -1,0 +1,2 @@
+module SwatenttionsHelper
+end

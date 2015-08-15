@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Issue:</strong>
+  <%= @swatenttion.issue %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @swatenttion.type_id %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @swatenttion.priority %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @swatenttion.comment %>
+</p>    
+
+<p>
+  <strong>Unity:</strong>
+  <%= @swatenttion.unity_id %>
+</p>
+
+<p>
+  <strong>Attention:</strong>
+  <%= @swatenttion.attention.id %>
+</p>
+
+<%= link_to 'Edit', edit_swatenttion_path(@swatenttion) %> |
+<%= link_to 'Back', swatenttions_path %>

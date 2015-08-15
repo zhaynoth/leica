@@ -24,7 +24,6 @@ class AttentionsController < ApplicationController
   # POST /attentions
   # POST /attentions.json
   def create
-    @projects = Project.all
     @attention = Attention.new(attention_params)
     @attention.participants = params[:participants]
     @attention.responsible = params[:responsible]

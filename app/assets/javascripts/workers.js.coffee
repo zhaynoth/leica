@@ -37,3 +37,5 @@ $(document).on "ajax:success", "form#delete-contract", (ev, data) ->
 	console.log data
 	$("#notice").remove();	
 	document.getElementById(data.msaje).remove();
+
+

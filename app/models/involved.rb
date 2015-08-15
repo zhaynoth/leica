@@ -7,4 +7,7 @@ class Involved < ActiveRecord::Base
   validates_presence_of :worker_id
   validates_presence_of :attention_id
   validates_presence_of :rol
+
+  #METHODS
+
 end

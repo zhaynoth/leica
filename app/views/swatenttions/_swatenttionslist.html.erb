@@ -1,0 +1,87 @@
+<table class='data-table table table-bordered table-striped table-condensed out-margin'>
+  <thead>
+    <tr>
+      <th>Issue</th>
+      <th>Mina</th>
+      <th>Reported by</th>
+      <th>Equipment</th>
+      <th>Category</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Asigned To</th>
+      <th>Workers</th>
+      <th>Comment</th>
+      <th>Created</th>
+      <th>Done</th>
+      <th>HH</th>
+      <th>H.Hom</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @swatenttions.each do |swatenttion| %>
+      <tr>
+        <!-- issue -->
+        <% if swatenttion.issue.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= swatenttion.issue %>">
+            <%= swatenttion.issue[0,45] %> 
+          </td>           
+        <% else %>  
+          <td><%= swatenttion.issue %></td>
+        <% end %>
+        <!-- end issue -->
+
+        <td><%= swatenttion.attention.contract.project.nombre %></td>
+        <td><%= swatenttion.attention.reportby %></td>
+        <td><%= swatenttion.unity.unity %></td>
+        <td><%= swatenttion.unity.unity_subtype.subtype %></td>
+        <td><%= get_type_valor(swatenttion.type_id) %></td>
+        <td>
+          <!-- put status -->
+          <% case swatenttion.attention.type.valor %>
+            <% when "Closed" %>
+              <span class="label label-success">Closed</span>
+            <% when "Pending" %>
+              <span class="label label-important">Pending</span>
+            <% when "In Process" %>
+              <span class="label label-warning">In Process</span>
+            <% else %>
+              <span>No defined</span>
+          <% end %>
+        </td>
+        <td><%= get_type_valor(swatenttion.priority) %></td>
+        <td><%= get_responsible(swatenttion.attention.involved).nombre%></td>
+        <td><%= swatenttion.attention.involved.count() %></td>
+
+        <!-- put comment-->
+        <% if swatenttion.comment.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= swatenttion.comment %>">
+            <%= swatenttion.comment[0,45] %>
+          </td>
+        <% else %>
+          <td><%= swatenttion.comment %></td>
+        <% end %>
+        <!-- put comment-->
+
+        <td><%= swatenttion.attention.dateinc %></td>
+        <td><%= swatenttion.attention.datefin %></td>
+        <td><%= swatenttion.attention.horas %></td>
+        <td><%= swatenttion.attention.horashombre %></td>
+        <td><%= link_to 'Show', swatenttion %></td>
+        <td><%= link_to 'Edit', edit_swatenttion_path(swatenttion) %></td>
+        <td><%= link_to 'Destroy', swatenttion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+</script>
