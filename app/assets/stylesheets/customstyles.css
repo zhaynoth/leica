@@ -36,6 +36,16 @@
 	width: 160px;
 }
 
+.form-login{
+	padding: 0px 30px;
+}
+
+.notice-login{
+	color: #F34541;
+	background-color: transparent;
+	border-color: transparent;
+}
+
 /* Start form attentions*/
 .form-box{
 	font-size: 95%;
@@ -95,6 +105,11 @@ button.multiselect {
 }
 .menu{
 	background-color: #0055A6;	
+}
+
+.navbar-right {
+    float: right !important;
+
 }
 
 /*Content Customization*/
