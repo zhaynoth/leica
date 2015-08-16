@@ -6,6 +6,8 @@ class Worker < ActiveRecord::Base
 	has_many :involved
 	has_many :attention, through: :involved
 
+	has_one :user
+
 	belongs_to :type
 
 	#VALIDATIONS

@@ -8,10 +8,13 @@ class CreateAttentions < ActiveRecord::Migration
       t.float :horas
       t.float :horashombre
       t.integer :contract_id, index: true
+      t.belongs_to :user, index: true
 
       t.timestamps
     end
     add_foreign_key(:attentions, :types, column: 'type_id')
     add_foreign_key(:attentions, :contracts, column: 'contract_id')
+    add_foreign_key(:attentions, :users, column: 'user_id')
+    
   end
 end

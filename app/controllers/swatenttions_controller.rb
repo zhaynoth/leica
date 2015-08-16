@@ -26,8 +26,8 @@ class SwatenttionsController < ApplicationController
   # POST /swatenttions.json
   def create
 
-    @attention = Attention.new(attention_params)
-    # #set worker_id to create involved record with "responsable" rol    
+    @attention = current_user.attention.new(attention_params)
+    #set worker_id to create involved record with "responsable" rol    
     @attention.responsible = params[:attention][:responsible]
     #cout worker_id's to calculate men-hours and create involved records with "paticipante" rol   
     if params[:attention][:participants] != nil

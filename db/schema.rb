@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815033419) do
+ActiveRecord::Schema.define(version: 20150815212305) do
 
   create_table "attentions", force: true do |t|
     t.string   "reportby"
@@ -21,12 +21,14 @@ ActiveRecord::Schema.define(version: 20150815033419) do
     t.float    "horas",       limit: 24
     t.float    "horashombre", limit: 24
     t.integer  "contract_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "attentions", ["contract_id"], name: "attentions_contract_id_fk", using: :btree
   add_index "attentions", ["type_id"], name: "attentions_type_id_fk", using: :btree
+  add_index "attentions", ["user_id"], name: "index_attentions_on_user_id", using: :btree
 
   create_table "contract_workers", force: true do |t|
     t.integer  "contract_id"
@@ -124,14 +126,15 @@ ActiveRecord::Schema.define(version: 20150815033419) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
     t.string   "permission_level"
+    t.integer  "worker_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["worker_id"], name: "index_users_on_worker_id", using: :btree
 
   create_table "workers", force: true do |t|
     t.string   "nombre"
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 20150815033419) do
 
   add_foreign_key "attentions", "contracts", name: "attentions_contract_id_fk"
   add_foreign_key "attentions", "types", name: "attentions_type_id_fk"
+  add_foreign_key "attentions", "users", name: "attentions_user_id_fk"
 
   add_foreign_key "contract_workers", "contracts", name: "contract_workers_contract_id_fk"
   add_foreign_key "contract_workers", "workers", name: "contract_workers_worker_id_fk"
@@ -165,6 +169,8 @@ ActiveRecord::Schema.define(version: 20150815033419) do
   add_foreign_key "unities", "unity_subtypes", name: "unities_unity_subtype_id_fk"
 
   add_foreign_key "unity_subtypes", "unity_types", name: "unity_subtypes_unity_types_id_fk", column: "unity_types_id"
+
+  add_foreign_key "users", "workers", name: "users_worker_id_fk"
 
   add_foreign_key "workers", "types", name: "workers_type_id_fk"
 

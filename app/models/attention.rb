@@ -5,6 +5,7 @@ class Attention < ActiveRecord::Base
 
 	belongs_to :type
 	belongs_to :contract
+	belongs_to :user
 
 	has_one :swatenttion
 
