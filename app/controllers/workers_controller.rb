@@ -35,7 +35,13 @@ class WorkersController < ApplicationController
     respond_to do |format|    
       if @worker.save
         #create a user count for created worker if flag is 'on'    
-        if params[:flag][:usercount] == 'on' 
+        if params[:flag][:usercount] == 'on'
+
+          if params[:flag][:permission] == 'admin'
+             params[:workeruser][:permission_level] = 'Admin'
+          else
+             params[:workeruser][:permission_level] = @worker.type.valor
+          end 
           @worker.create_user(user_params)
           format.html { redirect_to workers_path, notice: 'El registro y la cuenta de usuario se crearon con éxito.' }
         else
@@ -140,11 +146,11 @@ class WorkersController < ApplicationController
     end
 
     def user_params
-      params.require(:workeruser).permit(:email, :password, :password_confirmation)
+      params.require(:workeruser).permit(:email, :password, :password_confirmation, :permission_level)
     end
 
     def flag_params
-      params.require(:flag).permit(:usercount)      
+      params.require(:flag).permit(:usercount, :permission)      
     end
 
 end
