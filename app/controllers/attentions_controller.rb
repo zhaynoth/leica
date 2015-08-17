@@ -1,8 +1,7 @@
 class AttentionsController < ApplicationController
-  before_action :set_attention, only: [:show, :edit, :update, :destroy]
-  before_action :set_status, only: [:index, :show]
-  before_action :set_methods_for_form, only:[:index, :create]
-
+  # before_action :set_attention, only: [:show, :edit, :update, :destroy]
+  before_action :set_methods_for_reports, only:[:index, :create]
+  helper_method :get_responsible, :get_type_valor
   # GET /attentions
   # GET /attentions.json
   def index
@@ -24,34 +23,34 @@ class AttentionsController < ApplicationController
   # POST /attentions
   # POST /attentions.json
   def create
-    @attention = Attention.new(attention_params)
-    @attention.participants = params[:participants]
-    @attention.responsible = params[:responsible]
-    @attention.nro_involved =  params[:participants].count + 1
+    # @attention = Attention.new(attention_params)
+    # @attention.participants = params[:participants]
+    # @attention.responsible = params[:responsible]
+    # @attention.nro_involved =  params[:participants].count + 1
 
-    respond_to do |format|
-      if @attention.save
-        format.html { redirect_to @attention, notice: 'Attention was successfully created.' }
-        format.json { render :show, status: :created, location: @attention }
-      else
-        format.html { render :index }
-        format.json { render json: @attention.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @attention.save
+    #     format.html { redirect_to @attention, notice: 'Attention was successfully created.' }
+    #     format.json { render :show, status: :created, location: @attention }
+    #   else
+    #     format.html { render :index }
+    #     format.json { render json: @attention.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /attentions/1
   # PATCH/PUT /attentions/1.json
   def update
-    respond_to do |format|
-      if @attention.update(attention_params)
-        format.html { redirect_to @attention, notice: 'Attention was successfully updated.' }
-        format.json { render :show, status: :ok, location: @attention }
-      else
-        format.html { render :edit }
-        format.json { render json: @attention.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @attention.update(attention_params)
+    #     format.html { redirect_to @attention, notice: 'Attention was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @attention }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @attention.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /attentions/1
@@ -75,15 +74,27 @@ class AttentionsController < ApplicationController
       params.require(:attention).permit(:reportby, :dateinc, :datefin, :type_id, :contract_id, :participants, :responsible)
     end
 
-    # EXTRA PRIVATE METHODS
-    def set_status
-      $status_types = Type.where(:campo => 'attentions_status')
+  # EXTRA PRIVATE METHODS
+  def get_responsible (inv)
+    @invol = inv
+    @invol.each do |i|
+      if i.rol == 'responsable' 
+        @resp_worker_id = i.worker_id
+      end
     end
-    def set_methods_for_form
+    @resp_worker = Worker.find(@resp_worker_id)      
+  end
+
+  def get_type_valor (typ_id)
+    @type_valor = Type.find(typ_id)
+    @type_valor.valor
+  end
+
+
+    def set_methods_for_reports
       @attentions = Attention.all
-      @attention = Attention.new
-      @projects = Project.all
-      @workers = Worker.all    
     end
+
+
 
 end

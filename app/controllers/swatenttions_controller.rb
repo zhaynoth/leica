@@ -120,7 +120,8 @@ class SwatenttionsController < ApplicationController
 
     # EXTRA PRIVATE METHODS
     def set_methods_for_form 
-      @swatenttions = Swatenttion.all
+      @user_attentions = current_user.attention
+
       @swatenttion = Swatenttion.new    
       @projects = Project.all
       @workers = Worker.all  
@@ -130,5 +131,4 @@ class SwatenttionsController < ApplicationController
       $priority = Type.where(:campo => 'swattentions_priority')
       $equipment = Unity.all
     end
-
 end

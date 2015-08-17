@@ -3,47 +3,86 @@
     <tr>
       <th>Issue</th>
       <th>Mina</th>
-      <th>Reported by </th>
+      <th>Reported by</th>
       <th>Equipment</th>
       <th>Category</th>
       <th>Type</th>
       <th>Status</th>
       <th>Priority</th>
-      <th>Assigned to</th>
-      <th>Comment</th>
-      <th>Dateinc</th>
-      <th>Datefin</th>
+      <th>Asigned To</th>
       <th>Workers</th>
-      <th>Hours</th>
-      <th>H.Hom</th>      
+      <th>Comment</th>
+      <th>Created</th>
+      <th>Done</th>
+      <th>HH</th>
+      <th>H.Hom</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @attentions.each do |attention| %>
+    <% @attentions.each do |attns| %>
       <tr>
-        <td>Issue</td>
-        <td><%= attention.contract_id %></td>
-        <td><%= attention.reportby %></td>
-        <th>Equipment</th>
-        <td>Category</td>
-        <td>Type</td>
-        <td><%= attention.type_id %></td>
-        <td>Priority</td>
-        <td>Assigned to</td>
-        <td>Comment</td>
-        <td><%= attention.dateinc %></td>
-        <td><%= attention.datefin %></td>
-        <td>Workers</td>
-        <td><%= attention.horas %></td>
-        <td><%= attention.horashombre %></td>
-        <td><%= link_to 'Show', attention %></td>
-        <td><%= link_to 'Edit', edit_attention_path(attention) %></td>
-        <td><%= link_to 'Destroy', attention, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- issue -->
+        <% if attns.swatenttion.issue.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= attns.swatenttion.issue %>">
+            <%= attns.swatenttion.issue[0,45] %> 
+          </td>           
+        <% else %>  
+          <td><%= attns.swatenttion.issue %></td>
+        <% end %>
+        <!-- end issue -->
+
+        <td><%= attns.contract.project.nombre %></td>
+        <td><%= attns.reportby %></td>
+        <td><%= attns.swatenttion.unity.unity %></td>
+        <td><%= attns.swatenttion.unity.unity_subtype.subtype %></td>
+        <td><%= get_type_valor(attns.swatenttion.type_id) %></td>
+        <td>
+          <!-- put status -->
+          <% case attns.type.valor %>
+            <% when "Closed" %>
+              <span class="label label-success">Closed</span>
+            <% when "Pending" %>
+              <span class="label label-important">Pending</span>
+            <% when "In Process" %>
+              <span class="label label-warning">In Process</span>
+            <% else %>
+              <span>No defined</span>
+          <% end %>
+        </td>
+        <td><%= get_type_valor(attns.swatenttion.priority) %></td>
+        <td><%= get_responsible(attns.involved).nombre%></td>
+        <td><%= attns.involved.count() %></td>
+
+        <!-- put comment-->
+        <% if attns.swatenttion.comment.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= attns.swatenttion.comment %>">
+            <%= attns.swatenttion.comment[0,45] %>
+          </td>
+        <% else %>
+          <td><%= attns.swatenttion.comment %></td>
+        <% end %>
+        <!-- put comment-->
+
+        <td><%= attns.dateinc %></td>
+        <td><%= attns.datefin %></td>
+        <td><%= attns.horas %></td>
+        <td><%= attns.horashombre %></td>
+        <td><%= link_to 'Show', attns.swatenttion %></td>
+        <td><%= link_to 'Edit', edit_swatenttion_path(attns.swatenttion) %></td>
+        <td><%= link_to 'Destroy', attns.swatenttion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+</script>
       

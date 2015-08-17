@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resource :attentions
   end
   
+  get 'attentions' => 'attentions#index'
+
   resources :types 
   resources :guards  
   resources :turns

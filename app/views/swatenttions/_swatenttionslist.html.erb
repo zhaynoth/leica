@@ -22,26 +22,26 @@
   </thead>
 
   <tbody>
-    <% @swatenttions.each do |swatenttion| %>
+    <% @user_attentions.each do |usr_att| %>
       <tr>
         <!-- issue -->
-        <% if swatenttion.issue.length > 45 %>
-          <td data-toggle="tooltip" data-placement="bottom" title="<%= swatenttion.issue %>">
-            <%= swatenttion.issue[0,45] %> 
+        <% if usr_att.swatenttion.issue.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= usr_att.swatenttion.issue %>">
+            <%= usr_att.swatenttion.issue[0,45] %> 
           </td>           
         <% else %>  
-          <td><%= swatenttion.issue %></td>
+          <td><%= usr_att.swatenttion.issue %></td>
         <% end %>
         <!-- end issue -->
 
-        <td><%= swatenttion.attention.contract.project.nombre %></td>
-        <td><%= swatenttion.attention.reportby %></td>
-        <td><%= swatenttion.unity.unity %></td>
-        <td><%= swatenttion.unity.unity_subtype.subtype %></td>
-        <td><%= get_type_valor(swatenttion.type_id) %></td>
+        <td><%= usr_att.contract.project.nombre %></td>
+        <td><%= usr_att.reportby %></td>
+        <td><%= usr_att.swatenttion.unity.unity %></td>
+        <td><%= usr_att.swatenttion.unity.unity_subtype.subtype %></td>
+        <td><%= get_type_valor(usr_att.swatenttion.type_id) %></td>
         <td>
           <!-- put status -->
-          <% case swatenttion.attention.type.valor %>
+          <% case usr_att.type.valor %>
             <% when "Closed" %>
               <span class="label label-success">Closed</span>
             <% when "Pending" %>
@@ -52,32 +52,31 @@
               <span>No defined</span>
           <% end %>
         </td>
-        <td><%= get_type_valor(swatenttion.priority) %></td>
-        <td><%= get_responsible(swatenttion.attention.involved).nombre%></td>
-        <td><%= swatenttion.attention.involved.count() %></td>
+        <td><%= get_type_valor(usr_att.swatenttion.priority) %></td>
+        <td><%= get_responsible(usr_att.involved).nombre%></td>
+        <td><%= usr_att.involved.count() %></td>
 
         <!-- put comment-->
-        <% if swatenttion.comment.length > 45 %>
-          <td data-toggle="tooltip" data-placement="bottom" title="<%= swatenttion.comment %>">
-            <%= swatenttion.comment[0,45] %>
+        <% if usr_att.swatenttion.comment.length > 45 %>
+          <td data-toggle="tooltip" data-placement="bottom" title="<%= usr_att.swatenttion.comment %>">
+            <%= usr_att.swatenttion.comment[0,45] %>
           </td>
         <% else %>
-          <td><%= swatenttion.comment %></td>
+          <td><%= usr_att.swatenttion.comment %></td>
         <% end %>
         <!-- put comment-->
 
-        <td><%= swatenttion.attention.dateinc %></td>
-        <td><%= swatenttion.attention.datefin %></td>
-        <td><%= swatenttion.attention.horas %></td>
-        <td><%= swatenttion.attention.horashombre %></td>
-        <td><%= link_to 'Show', swatenttion %></td>
-        <td><%= link_to 'Edit', edit_swatenttion_path(swatenttion) %></td>
-        <td><%= link_to 'Destroy', swatenttion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= usr_att.dateinc %></td>
+        <td><%= usr_att.datefin %></td>
+        <td><%= usr_att.horas %></td>
+        <td><%= usr_att.horashombre %></td>
+        <td><%= link_to 'Show', usr_att.swatenttion %></td>
+        <td><%= link_to 'Edit', edit_swatenttion_path(usr_att.swatenttion) %></td>
+        <td><%= link_to 'Destroy', usr_att.swatenttion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 
 <script type="text/javascript">
   $(function () {

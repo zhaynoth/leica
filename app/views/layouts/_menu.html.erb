@@ -1,0 +1,52 @@
+<div class="menu">
+   <div class="container full"> 
+    <nav class="navbar navbar-default">
+     <div class="container-fluid">
+      <ul class="nav navbar-nav">
+          <!-- InstanceBeginEditable name="current-page" -->
+          <li><%= image_tag("logo.png") %></li>
+          <li><%= link_to 'Inicio', root_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atenciones<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Soporte Software', swatenttions_path %></li>
+              <li><a href="#">Campo</a></li>
+            </ul>    
+          </li>
+          <li><a href="#">Historial</a></li>
+          <li>
+          <%= link_to 'Reportes', attentions_path %>
+
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="nav-header">Proyectos / Operaciones</li>
+                <li><a href="#">Nuevo Proyecto / Operacion</a></li>
+                <li><a href="#">Contratos</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Trabajadores</li>
+                <li><%= link_to 'Registro Trabajadores / Asignación de Contratos', workers_path %></li>
+              <li class="divider"></li>
+              <li class="nav-header">Atenciones</li>
+                <li><a href="#">Atenciones General</a></li>
+                <li><a href="#">Atenciones Software</a></li>
+                <li><a href="#">Atenciones Campo</a></li>
+            </ul>
+          </li>
+          <!-- InstanceEndEditable -->         
+       </ul>  
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-user"></i> <%= current_user.email %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %></li>              
+            </ul>    
+        </li>
+      </ul>
+      </div>
+    </nav>
+  </div>
+</div>

@@ -84,6 +84,9 @@
 .records-size{
 	font-size: 82%;
 }
+.records-size-medium{
+	font-size: 86%;
+}
 /* Start attentions list*/
 button.multiselect {
     padding: 1px 3px 0px 3px !important;
