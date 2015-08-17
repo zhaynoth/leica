@@ -104,17 +104,11 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Password Confirmation</label>
-                <div class="controls">
-                    <%= password_field_tag "workeruser[password_confirmation]", nil, class: 'span12', autocomplete: 'off' %>
-                </div>
-            </div>
-            <div class="control-group">
                 <label class="control-label">Permission Level</label>
                 <div class="controls">
                     <label class="radio inline">
                         <%= radio_button_tag("flag[permission]", "cargo", true) %>        
-                        Segun el cargo
+                        Según el cargo
                     </label>
                     <label class="radio inline">
                         <%= radio_button_tag("flag[permission]", "admin") %>

@@ -15,6 +15,7 @@ class WorkersController < ApplicationController
     @unassigned_contracts = @worker.unassigned_contracts
     @contract_workers = @worker.contract_worker
     @projects = Project.all
+    @account = @worker.user
   end
 
   # GET /workers/new
@@ -34,22 +35,32 @@ class WorkersController < ApplicationController
     @worker = Worker.new(worker_params)
     respond_to do |format|    
       if @worker.save
-        #create a user count for created worker if flag is 'on'    
+        #create a user account for created worker if flag is 'on'    
         if params[:flag][:usercount] == 'on'
-
+          #set a permission level using flag-permission
           if params[:flag][:permission] == 'admin'
              params[:workeruser][:permission_level] = 'Admin'
           else
              params[:workeruser][:permission_level] = @worker.type.valor
           end 
+
           @worker.create_user(user_params)
-          format.html { redirect_to workers_path, notice: 'El registro y la cuenta de usuario se crearon con éxito.' }
+
+          if Worker.last.user != nil 
+            format.html { redirect_to workers_path, notice: 'El registro y la cuenta de usuario se crearon con éxito.' }
+          else
+            Worker.last.destroy
+            format.html { redirect_to workers_path, notice: '¡No se ha podido guardar el último registro porque el Usuario o password es inválido!' }
+          end
+
         else
           format.html { redirect_to workers_path, notice: 'El registro se creó con éxito.' }
-        end        
+        end
+
         format.json { render :show, status: :created, location: @worker }
         format.js
       else
+
         format.html { render :index }
         format.json { render json: @worker.errors, status: :unprocessable_entity }
       end
@@ -61,8 +72,22 @@ class WorkersController < ApplicationController
   def update
     respond_to do |format|
       if @worker.update(worker_params)
+
+        # add user account
+        if params[:flag][:usercount] == 'on'
+          #set a permission level using flag-permission
+          if params[:flag][:permission] == 'admin'
+             params[:workeruser][:permission_level] = 'Admin'
+          else
+             params[:workeruser][:permission_level] = @worker.type.valor
+          end 
+
+          @worker.create_user(user_params)
+        end
+
         format.html { redirect_to @worker, notice: 'El registro se actualizó con éxito.' }
         format.json { render :show, status: :ok, location: @worker }
+
       else
         format.html { render :edit }
         format.json { render json: @worker.errors, status: :unprocessable_entity }
@@ -146,7 +171,7 @@ class WorkersController < ApplicationController
     end
 
     def user_params
-      params.require(:workeruser).permit(:email, :password, :password_confirmation, :permission_level)
+      params.require(:workeruser).permit(:email, :password, :permission_level)
     end
 
     def flag_params

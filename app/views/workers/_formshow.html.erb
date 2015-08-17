@@ -1,0 +1,184 @@
+<div class="row-fluid out-margin">
+<div class="span12">
+<div class="box-content box-double-padding">
+<%= form_for(@worker,  :id => 'submit_worker') do |f| %>                            
+    <fieldset>
+        <div class="span4 box">
+            <div class="lead">
+                <i class="icon-user text-contrast"></i>
+                Update Personal info
+            </div>
+            <small class="muted">Registre la información personal del trabajador.</small>
+        </div>
+        <div class="span7 offset1">
+
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">Nombres</label>
+                <div class="controls">
+                    <%= f.text_field :nombre, :class => 'span12' %>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Apellidos</label>
+                <div class="controls">
+                    <%= f.text_field :apellido, :class => 'span12' %>
+                </div>
+            </div>
+            <hr>
+            <div class="control-group">
+                <label class="control-label">Fotocheck</label>
+                <div class="controls">
+                    <%= f.text_field :fotocheck, :class => 'span12' %>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">Teléfono</label>
+                <div class="controls">
+                    <%= f.text_field :telefono, :class => 'span12' %>                                                  
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Email</label>
+                <div class="controls">
+                    <%= f.text_field :email, :class => 'span12', :type => 'email',
+                    :"data-fv-emailaddress-message" => "Dirección de email no válida" %>
+                </div>
+            </div>
+            <hr>
+            <div class="control-group">
+                <label class="control-label">Cargo</label>
+                <div class="controls">
+                    <%= f.collection_select(:type_id, $cargo_types, :id, :valor, {}, 
+                    {:class => "span12"}) %>
+                </div>
+            </div>                                       
+        </div>
+
+        </div>
+    </fieldset>
+
+    <hr class="hr-normal">
+    <!-- información de cuenta de usuario -->
+
+    <% if @account != nil %>
+        <fieldset>
+            <div class="span4">
+                <div class="lead">
+                    <i class="icon-signin text-contrast"></i>
+                    Login info
+                </div>
+                <small class="muted">Información de Cuenta de Usuario.</small>
+            </div>
+            <div class="span7 offset1">
+             <div id="login_form">
+                <div class="control-group">
+                    <label class="inline">
+                        <strong>Username (Email):</strong> <%= @account.email %>
+                    </label>
+                </div>
+                <div class="control-group">
+                    <label class="inline">
+                        <strong>Permission Level: </strong><%= @account.permission_level %>
+                    </label>
+                </div>
+                <div class="control-group">
+
+                </div>
+             </div>
+            </div>
+        </fieldset>
+    <% else %>
+        <fieldset>
+                <div class="span4">
+                    <div class="lead">
+                        <i class="icon-signin text-contrast"></i>
+                        Login info
+                    </div>
+                    <small class="muted">Este trabajador no tiene cuenta de usuario. Si el trabajador necesita ingresar al sistema, cree una cuanta de usuario.</small>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox inline muted">
+                                <%= radio_button_tag("flag[usercount]", "off", true)%>
+                                Actualizar sin cuenta de usuario.
+                            </label>
+                        </div> 
+                    </div> 
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox inline muted">
+                                <%= radio_button_tag("flag[usercount]", "on") %>        
+                                Crear cuenta para este trabajador.
+                            </label>                    
+                        </div>
+                    </div>
+                </div>
+                <div class="span7 offset1">
+                 <div id="login_form" style="display: none;">
+                    <div class="control-group">
+                        <label class="control-label">Username (Email)</label>
+                        <div class="controls">
+                            <%= email_field_tag "workeruser[email]", 'email@example.com', class: 'span12', autocomplete: 'off' %>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Password</label>
+                        <div class="controls">
+                            <% if @minimum_password_length %>
+                                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                            <% end %>
+                            <%= password_field_tag "workeruser[password]", '', class: 'span12', autocomplete: 'off' %>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Permission Level</label>
+                        <div class="controls">
+                            <label class="radio inline">
+                                <%= radio_button_tag("flag[permission]", "cargo", true) %>        
+                                Según el cargo
+                            </label>
+                            <label class="radio inline">
+                                <%= radio_button_tag("flag[permission]", "admin") %>
+                                Administrador
+                            </label>
+                        </div>
+                    </div>
+                 </div>
+                </div>
+            </fieldset>        
+    <% end %>
+                                 
+
+    <div class="form-actions" style="margin-bottom: 0;">
+        <div class="span7">
+            <% if notice != nil %>
+                <div id="notice" class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">×</a>
+                <i class="icon-ok-sign"></i>
+                <%= notice %>
+                </div>            
+            <% end  %> 
+
+            <% if @worker.errors.any? %>
+                <div id="error_explanation" class="alert alert-error">
+                    <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+                    <ul>
+                    <% @worker.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                </div>                    
+            <% end %>
+        </div>
+        <div class="span4">
+            <div class="text-right">
+                <%= f.submit :class => 'btn btn-primary btn-large' %>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+</div> 
+</div>
