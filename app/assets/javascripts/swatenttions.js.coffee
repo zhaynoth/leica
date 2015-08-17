@@ -7,5 +7,5 @@ $(document).on "click", ".link", (ev) ->
 						<a href='' class='close' data-dismiss='alert'>×</a>
 						<textarea class=' form-box form-input' name='d'></textarea>
 				</div>"
-	$("#intxt").append inputxt
+$("#intxt").append inputxt
 

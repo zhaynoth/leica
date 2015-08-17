@@ -39,3 +39,14 @@ $(document).on "ajax:success", "form#delete-contract", (ev, data) ->
 	document.getElementById(data.msaje).remove();
 
 
+
+#actions for login form
+
+$(document).on "change", "#flag_usercount_on", (ev) ->
+	if $("#flag_usercount_on:checked")
+  		$("#login_form").show()
+
+$(document).on "change", "#flag_usercount_off", (ev) ->
+	if $("#flag_usercount_off:checked")
+  		$("#login_form").hide()
+

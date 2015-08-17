@@ -6,7 +6,7 @@ class WorkersController < ApplicationController
   # GET /workers.json
   def index
     @workers = Worker.all  
-    @worker = Worker.new       
+    @worker = Worker.new 
   end
 
   # GET /workers/1
@@ -29,13 +29,18 @@ class WorkersController < ApplicationController
   # POST /workers
   # POST /workers.json
   def create
-    #variable para mostrar lsta de trabajadores después de crear uno 
-    @workers = Worker.all 
-
+    #variable para mostrar lsta de trabajadores después de crear uno. 
+    @workers = Worker.all     
     @worker = Worker.new(worker_params)
     respond_to do |format|    
-      if @worker.save        
-        format.html { redirect_to workers_path, notice: 'El registro se creó con éxito.' }
+      if @worker.save
+        #create a user count for created worker if flag is 'on'    
+        if params[:flag][:usercount] == 'on' 
+          @worker.create_user(user_params)
+          format.html { redirect_to workers_path, notice: 'El registro y la cuenta de usuario se crearon con éxito.' }
+        else
+          format.html { redirect_to workers_path, notice: 'El registro se creó con éxito.' }
+        end        
         format.json { render :show, status: :created, location: @worker }
         format.js
       else
@@ -114,35 +119,6 @@ class WorkersController < ApplicationController
       end
     end
   end
-
-  def contract_removes
-    @contract_worker = ContractWorker.where(:contract_id => contract.id, :worker_id =>worker.id ) 
-    @contract_worker.destroy
-    respond_to do |cw|
-      format.html { redirect_to @worker, notice: 'El registro se actualizó con éxito.' }
-      format.json { render :show, status: :ok, location: @worker }
-    end
-
-    #Convert ids from routing to object
-    @worker = worker.find(params [:id])
-
-    #get list of contracts to remove from query string
-    contract_ids = params[:contracts]
-
-    unless contract_ids.blank?
-      contract_ids.each do |contract_id|
-        contract = Contract.find(contract_id)
-        if @worker.assigned_in?(contract)
-          logger.info "Trabajdor removido del contrato #{contract.id}" 
-          @worker.contracts.DELETE(contract)
-          flash[:notice] = 'contrato removido con éxito'         
-        end
-      end
-    end
-
-    format.html{ redirect_to :action => :contracts, :id => @worker}
-  end
-
 # ---------------END EXTRA METHODS----------------
 
 
@@ -161,6 +137,14 @@ class WorkersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def worker_params
       params.require(:worker).permit(:nombre, :apellido, :type_id, :fotocheck, :telefono, :email)
+    end
+
+    def user_params
+      params.require(:workeruser).permit(:email, :password, :password_confirmation)
+    end
+
+    def flag_params
+      params.require(:flag).permit(:usercount)      
     end
 
 end
