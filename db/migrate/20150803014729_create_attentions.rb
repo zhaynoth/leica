@@ -8,6 +8,7 @@ class CreateAttentions < ActiveRecord::Migration
       t.float :horas
       t.float :horashombre
       t.integer :contract_id, index: true
+      t.string :report
       t.belongs_to :user, index: true
 
       t.timestamps

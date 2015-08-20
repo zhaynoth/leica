@@ -1,3 +1,4 @@
+<% if current_user.permission_level == 'Admin' %>
 <div class="row-fluid marg-top">
 	<div class="span4 box box-nomargin">
 		<div class="box-header green-background">
@@ -6,7 +7,7 @@
 		<div class="box-content">
 			<ul class="unstyled">
 			  <li class="nav-header">Registro de Atenciones</li>
-              <li><a href="#"> Soporte Diario Software</a></li>
+              <li><%= link_to 'Soporte Software', swatenttions_path %></li>
       		  <li><a href="#"> Soporte Diario Campo</a></li>
 			</ul>
 		</div>
@@ -18,7 +19,7 @@
 		<div class="box-content">
 			<ul class="unstyled">
               <li class="nav-header">Peporte Atenciones</li>
-              <li><%= link_to 'Soporte Software',swatenttions_path %></li>
+              <li><%= link_to 'Reporte Software', attentions_path %></li>
       		  <li><a href="#"> Soporte Campo</a></li>      		  
 			</ul>
 		</div>
@@ -44,3 +45,19 @@
 		</div>
 	</div>				
 </div>
+<% else %>
+<div class="row-fluid marg-top">
+	<div class="span4 box box-nomargin">
+		<div class="box-header green-background">
+			<div class="title"><i class="icon-pencil"></i> Atenciones</div>			
+		</div>
+		<div class="box-content">
+			<ul class="unstyled">
+			  <li class="nav-header">Registro de Atenciones</li>
+              <li><%= link_to 'Soporte Software', swatenttions_path %></li>
+      		  <li><a href="#"> Soporte Diario Campo</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<% end %>

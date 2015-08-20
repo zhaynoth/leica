@@ -1,0 +1,4 @@
+<%= form_for @flag_att, :url => { :action => "send_report" }, :html => {:class => 'out-margin'} do |f| %>
+  <%= f.submit "Enviar Reporte", :class=> 'btn btn-mini btn-danger', data: { confirm: '¿Confirma el envío del reporte?' } %>
+<% end %>
+

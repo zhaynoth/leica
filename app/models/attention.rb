@@ -1,13 +1,13 @@
 class Attention < ActiveRecord::Base
 	#RELATIONSHIPS
-	has_many :involved
+	has_many :involved, dependent: :destroy 
 	has_many :worker, through: :involved 
 
 	belongs_to :type
 	belongs_to :contract
 	belongs_to :user
 
-	has_one :swatenttion
+	has_one :swatenttion, dependent: :destroy 
 
 	#VALIDATIONS
 	validates_presence_of :reportby
@@ -20,6 +20,7 @@ class Attention < ActiveRecord::Base
 
 	#METHODS
 	before_save :set_hours
+	before_save :set_report
 	after_create :save_involved
 
 	#calculate hours and man hours
@@ -32,6 +33,11 @@ class Attention < ActiveRecord::Base
 		hh = mm/60
 		self.horas = hh	
 		self.horashombre = hh * @involved
+	end
+
+	#save repor status before save
+	def set_report
+		self.report = 'open'
 	end
 
 	#save relationships with workers (save_involved)

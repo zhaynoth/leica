@@ -26,8 +26,15 @@ Rails.application.routes.draw do
 
   resources :swatenttions do
     resource :attentions
+    member do
+      post 'send_report'
+    end
   end
-  
+
+  post 'sendrep' => 'swatenttions#send_report'
+  post 'closerep' => 'attentions#close_report'    
+
+
   get 'attentions' => 'attentions#index'
 
   resources :types 

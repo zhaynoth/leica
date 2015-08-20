@@ -3,16 +3,70 @@
     <!-- RECORDS ROW -->
     <div class='row-fluid'>
       <div class="span12">
-        <hr class='title-line'></hr>más cosas
-      </div>
-    </div>
-    <div class='row-fluid'>  
-      <div class="span12 out-margin ">
-        <div class="responsive-table records-size">
-          <div class='scrollable-area' style="height:600px">
-            <%= render 'attentionslist' %>
-          </div> 
-        </div>
+
+            <div class="tabbable">
+              <ul class="nav nav-tabs">
+                  <li class="active">
+                      <a data-toggle="tab" href="#tab1">
+                          <i class="icon-circle-arrow-down text-red"></i>
+                          Repores Recibidos
+                      </a>
+                  </li>
+                  <li>
+                      <a data-toggle="tab" href="#tab2">
+                          <i class="icon-th-list text-blue"></i>
+                          Reportes Cerrados
+                      </a>
+                  </li>
+              </ul>
+              <div class="tab-content">
+
+                  <div class="tab-pane active" id="tab1">
+                      <% if @send_attentions.blank? == false %>   
+                      <div class="row-fluid">
+                        <div class="span12 out-margin">
+                          <div class="sapn10">
+                            <% if notice != nil %>
+                              <div id="notice" class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert">×</a>
+                                <i class="icon-ok-sign"></i>
+                                <%= notice %>
+                              </div>            
+                            <% end  %> 
+                          </div>
+                          <div class="span2">
+                              <%= render 'closereport' %>
+                          </div>
+                        </div>
+                      </div>
+                      <% end %>
+                      <div class='row-fluid'>  
+                        <div class="span12 out-margin ">
+                          <div class="responsive-table records-size">
+                            <div class='scrollable-area' style="height:600px">
+                            <%= render 'attentionslistsend' %>
+                            </div> 
+                          </div>
+                        </div>
+                      </div> 
+                  </div>
+
+                  <div class="tab-pane" id="tab2">
+                    <div class="tab-pane active" id="tab1">
+                        <div class='row-fluid'>  
+                          <div class="span12 out-margin ">
+                            <div class="responsive-table records-size">
+                              <div class='scrollable-area' style="height:600px">
+                              <%= render 'attentionslistclose' %>
+                              </div> 
+                            </div>
+                          </div>
+                        </div> 
+                    </div>
+                  </div>
+
+              </div>
+          </div>
       </div>
     </div>
 </div>

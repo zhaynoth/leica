@@ -45,7 +45,7 @@ class SwatenttionsController < ApplicationController
         @swatenttion.set_attention_id = @attention_sv.id
         respond_to do |format|
           if @swatenttion.save
-            format.html { redirect_to @swatenttion, notice: 'Swatenttion was successfully created.' }
+            format.html { redirect_to swatenttions_url }
             format.json { render :show, status: :created, location: @swatenttion }
           else
             format.html { render :new }
@@ -77,15 +77,15 @@ class SwatenttionsController < ApplicationController
   # DELETE /swatenttions/1
   # DELETE /swatenttions/1.json
   def destroy
-    @swatenttion.destroy
+    @attparent = @swatenttion.attention
+    @attparent.destroy 
     respond_to do |format|
-      format.html { redirect_to swatenttions_url, notice: 'Swatenttion was successfully destroyed.' }
+      format.html { redirect_to swatenttions_url, notice: 'El registro se eliminó con éxito' }
       format.json { head :no_content }
     end
   end
 
-
-  # EXTRA METHODS
+  # ---------------EXTRA METHODS---------------
   # this method extract a responsible worker record  from a given attention´s involved list
   def get_responsible (inv)
     @invol = inv
@@ -100,6 +100,16 @@ class SwatenttionsController < ApplicationController
   def get_type_valor (typ_id)
     @type_valor = Type.find(typ_id)
     @type_valor.valor
+  end
+
+  #change attention report status to send
+  def send_report
+    @user_attentions = current_user.attention.where(:report => 'open')
+    respond_to do |format|
+      @user_attentions.update_all(report: "send")
+      format.html { redirect_to swatenttions_url, notice: 'El Reporte ha sido enviado con éxito.' }
+      format.json { head :no_content }
+    end      
   end
 
   private
@@ -119,12 +129,18 @@ class SwatenttionsController < ApplicationController
     end
 
     # EXTRA PRIVATE METHODS
-    def set_methods_for_form 
-      @user_attentions = current_user.attention
+    def set_methods_for_form
+      #flag to set report send
+      @flag_att = Attention.new
+      
+      @user_attentions = current_user.attention.where(:report => 'open')
 
-      @swatenttion = Swatenttion.new    
+      @swatenttion = Swatenttion.new
+          
       @projects = Project.all
-      @workers = Worker.all  
+      
+      #@workers = Worker.all  
+      @workers =  Worker.where(:type_id => 1)
 
       $status = Type.where(:campo => 'attentions_status')
       $swtype = Type.where(:campo => 'swattentions_type')

@@ -16,13 +16,13 @@
       <th>Done</th>
       <th>HH</th>
       <th>H.Hom</th>
-
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @user_attentions.each do |usr_att| %>
+    <% if usr_att.swatenttion != nil %>   
       <tr>
         <!-- issue -->
         <% if usr_att.swatenttion.issue.length > 45 %>
@@ -70,10 +70,10 @@
         <td><%= usr_att.datefin %></td>
         <td><%= usr_att.horas %></td>
         <td><%= usr_att.horashombre %></td>
-        <td><%= link_to 'Show', usr_att.swatenttion %></td>
-        <td><%= link_to 'Edit', edit_swatenttion_path(usr_att.swatenttion) %></td>
-        <td><%= link_to 'Destroy', usr_att.swatenttion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><i class="icon-pencil"></i><%= link_to 'Editar', edit_swatenttion_path(usr_att.swatenttion) %></td> -->
+        <td><i class="icon-trash"></i><%= link_to 'Elminar', usr_att.swatenttion, method: :delete, data: { confirm: '¿Seguro de eliminar el registro?' } %></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

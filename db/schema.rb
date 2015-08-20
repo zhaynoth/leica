@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150815212305) do
     t.float    "horas",       limit: 24
     t.float    "horashombre", limit: 24
     t.integer  "contract_id"
+    t.string   "report"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

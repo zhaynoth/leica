@@ -1,0 +1,4 @@
+<%= form_for @flag_att, :url => { :action => "close_report" }, :html => {:class => 'out-margin'} do |f| %>
+  <%= f.submit "Cerrar Reporte", :class=> 'btn btn-mini btn-danger', data: { confirm: '¿Confirma el cierre del reporte?' } %>
+<% end %>
+

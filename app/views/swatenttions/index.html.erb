@@ -8,9 +8,13 @@
     <!-- RECORDS ROW -->
     <div class='row-fluid'>
       <div class="span12">
-        <hr class='title-line'></hr>más cosas
+          <hr class='title-line'> 
+          <% if @user_attentions.blank? == false %>         
+            <%= render 'sendreport' %>
+          <% end %>
       </div>
     </div>
+
     <div class='row-fluid'>  
       <div class="span12 out-margin ">
         <div class="responsive-table records-size">
@@ -22,4 +26,4 @@
     </div>
 </div>
 </div> 
-<br>
+

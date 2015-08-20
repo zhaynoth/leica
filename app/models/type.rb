@@ -1,5 +1,5 @@
 class Type < ActiveRecord::Base
-	has_many :worker, dependent: :destroy
+	has_many :worker
 	
 	#VALIDATIONS
 	validates_presence_of :campo

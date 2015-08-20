@@ -63,13 +63,6 @@ class ContractsController < ApplicationController
   end
 
   # ---------------START EXTRA METHODS----------------
-
-  # GET /contracts/1/assigned
-  # provide a list of which workers are in a given contract
-  # def assigned
-  #  @contract = Contract.find(params[:id])
-  # end
-
   # ---------------END EXTRA METHODS----------------
 
   private
