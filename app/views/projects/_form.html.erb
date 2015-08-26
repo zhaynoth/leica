@@ -1,25 +1,61 @@
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div class="row-fluid out-margin">
+<div class="span12">
+<div class="box-content box-double-padding">
+<%= form_for(@project) do |f| %>                        
+    <fieldset>
+        <div class="span4 box">
+            <div class="lead">
+                <i class="icon-rocket text-contrast"></i>
+                Project info
+            </div>
+            <small class="muted">Registre la información del Proyeto / Operación.</small>
+        </div>
+        <div class="span7 offset1">
+          <div class="span12">
+              <div class="control-group">
+                  <label class="control-label">Nombre del Proyecto</label>
+                  <div class="controls">
+                      <%= f.text_field :nombre, :class => 'span12' %>
+                  </div>
+              </div>
+              <div class="control-group">
+                  <label class="control-label">Ubicación</label>
+                  <div class="controls">
+                      <%= f.text_field :ubicacion, :class => 'span12' %>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </fieldset>                      
 
-      <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="form-actions" style="margin-bottom: 0;">
+        <div class="span7">
+            <% if notice != nil %>
+                <div id="notice" class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">×</a>
+                <i class="icon-ok-sign"></i>
+                <%= notice %>
+                </div>            
+            <% end  %> 
+
+            <% if @project.errors.any? %>
+                <div id="error_explanation" class="alert alert-error">
+                    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+                    <ul>
+                    <% @project.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                </div>                    
+            <% end %>
+        </div>
+        <div class="span4">
+            <div class="text-right">
+                <%= f.submit :class => 'btn btn-primary btn-large' %>
+            </div>
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :ubicacion %><br>
-    <%= f.text_field :ubicacion %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
+</div>
+</div> 
+</div>

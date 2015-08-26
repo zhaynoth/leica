@@ -25,12 +25,13 @@ class ContractsController < ApplicationController
   # POST /contracts
   # POST /contracts.json
   def create
-    @contract = Contract.new(contract_params)
+    @project = Project.find(params[:project_id])
+    @contract = @project.contract.new(contract_params)
 
     respond_to do |format|
       if @contract.save
-        format.html { redirect_to @contract, notice: 'Contract was successfully created.' }
-        format.json { render :show, status: :created, location: @contract }
+        format.html { redirect_to @contract }
+        format.json { render :show, status: :created, location: @contract.project }
       else
         format.html { render :new }
         format.json { render json: @contract.errors, status: :unprocessable_entity }
@@ -58,7 +59,7 @@ class ContractsController < ApplicationController
     @contract.destroy
     respond_to do |format|
       format.html { redirect_to contracts_url, notice: 'Contract was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render :show, status: :ok }
     end
   end
 

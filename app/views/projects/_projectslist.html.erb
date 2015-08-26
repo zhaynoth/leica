@@ -1,0 +1,27 @@
+<table class='data-table table table-bordered table-striped records-size-medium' style='margin-bottom:0;'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre</th>
+      <th>Ubicacion</th>
+      <th>Contratos</th>
+      <th style="width: 60px;"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% nro = 0 %>
+    <% @projects.each do |project| %>
+    <% nro += 1%>
+      <tr>
+        <td><%= nro%></td>
+        <td><%= project.nombre %></td>
+        <td><%= project.ubicacion %></td>
+        <td><%= project.contract.count %></td>
+        <td><%= link_to 'Seleccionar', project, :class=> 'btn btn-mini btn-primary' %></td>
+        <% link_to 'Edit', edit_project_path(project) %>
+        <% link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

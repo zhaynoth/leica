@@ -1,0 +1,40 @@
+<table class='data-table table table-bordered table-condensed table-striped records-size-medium' style='margin-bottom:0;'>
+  <thead>
+  <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Cargo</th>
+      <th>Account</th>
+      <th>Contr.</th>
+      <th>Fotocheck</th>
+      <th>Telefono</th>
+      <th>Email</th>      
+      <th></th>
+  </tr>
+  </thead>
+  <tbody>
+   <% @workers.each do |worker| %>
+      <tr>
+        <td><%= worker.nombre %></td>
+        <td><%= worker.apellido %></td>
+        <td><%= worker.type.valor %></td>
+        <td>
+          <% if worker.user != nil %>
+            si
+          <% else %>
+            no
+          <% end %>
+        </td>
+        <td><%= worker.contract.count %></td>
+        <td><%= worker.fotocheck %></td>
+        <td><%= worker.telefono %></td>
+        <td><%= worker.email %></td> 
+        
+        <td><%= link_to 'Seleccionar', worker, :class=> 'btn btn-mini btn-primary' %>
+        <% link_to 'Edit', edit_worker_path(worker) %>
+        <% link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+             
+      </tr>
+    <% end %>  
+  </tbody>
+</table>

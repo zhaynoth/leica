@@ -1,0 +1,16 @@
+<div class="span6"> 
+	<div class="control-group">
+		<%= form_for([@project, Contract.new], remote: :true, html: { :"data-type" => "json" }) do |f| %>
+			<strong class: "span3">NUEVO CONTRATO</strong>
+	        <%= f.text_field :nombre, :class => 'span7 out-margin' %>
+			<%= f.submit 'Crear', :class=> 'span2 btn btn-small btn-primary' %>
+		<% end %>
+	</div>
+</div>
+<div class="span6">
+	<% if notice != nil %>
+		<div id="content-notice" class="span6">	
+			<!-- Place for notices -->
+		</div>
+	<% end %>
+</div>

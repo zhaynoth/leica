@@ -1,0 +1,18 @@
+<table class='data-table table table-bordered table-striped records-size-medium' style='margin-bottom:0;'>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th style="width: 30px;"></th>
+    </tr>
+  </thead>
+
+  <tbody id="contracts-project-list">
+
+    <% @contracts.each do |c| %>
+      <tr id='<%= c.id %>'>        
+        <td><%= c.nombre %></td>
+        <td><%= link_to 'Eliminar', c, remote: true, method: :delete, :"data-type" => "json" , data: { confirm: 'Are you sure?'}, class: "btn btn-mini btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

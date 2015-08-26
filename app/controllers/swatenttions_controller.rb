@@ -1,6 +1,6 @@
 class SwatenttionsController < ApplicationController
   before_action :set_swatenttion, only: [:show, :edit, :update, :destroy]
-  before_action :set_methods_for_form, only:[:index, :create]
+  before_action :set_methods_for_form, only: [:index, :create]
   helper_method :get_responsible, :get_type_valor
 
   # GET /swatenttions

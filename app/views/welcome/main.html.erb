@@ -1,3 +1,4 @@
+<% if notice != nil%>
 <div class="row-fluid">
 	<div id="notice" class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">×</a>
@@ -5,6 +6,7 @@
         <%= notice %>
     </div> 
 </div>
+<% end %>
 
 <% if user_signed_in? %>
 <div class="row-fluid marg-top">
@@ -39,9 +41,8 @@
 		<div class="box-content">
 			<ul class="unstyled">
               <li class="nav-header">Proyectos / Operaciones</li>              
-              <li><a href="#"> Nuevo Proyecto / Operacion</a></li>
-      		  <li><a href="#"> Contratos</a></li>
-      		  <hr class="hr-bottom">
+              <li><%= link_to 'Proyectos y Contratos', projects_path %></li>
+       		  <hr class="hr-bottom">
               <li class="nav-header">Trabajadores</li>
   			  <li><%= link_to 'Registrar Trabajadores', workers_path %></li> 
               <hr class="hr-bottom">
