@@ -1,9 +1,12 @@
 Rails.application.routes.draw do   
 
   devise_for :users
-  resources :unities
 
-  resources :unity_subtypes
+  resources :unity_subtypes do
+    resources :unities
+  end
+
+  resources :unities
 
   resources :projects do
     resources :contracts

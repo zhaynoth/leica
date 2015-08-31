@@ -1,1 +1,5 @@
-json.extract! @unity, :id, :unity, :unity_subtype_id, :created_at, :updated_at
+json.extract! @unity, :id, :unity
+
+json.project do
+	json.project_nombre @project.nombre
+end

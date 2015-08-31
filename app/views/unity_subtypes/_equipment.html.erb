@@ -1,0 +1,24 @@
+<table class='data-table table table-bordered table-striped table-condensed' style='margin-bottom:0;'>
+  <thead>
+    <tr>
+      <th>Equipment</th>
+      <th>Proyecto</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody id="equipment-list">
+    <% @equipment.each do |eq| %>
+      <tr id = '<%= eq.id %>'>
+        <td><%= eq.unity %></td>
+        <td><%= eq.project.nombre %></td>
+        <td><%= link_to 'Eliminar', eq, 
+            remote: true, method: :delete, 
+            :"data-type" => "json" , 
+            data: { confirm: 'Are you sure?'}, 
+            class: "btn btn-mini btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

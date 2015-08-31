@@ -1,14 +1,66 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Subtype:</strong>
-  <%= @unity_subtype.subtype %>
-</p>
-
-<p>
-  <strong>Unity type:</strong>
-  <%= @unity_subtype.unity_type_id %>
-</p>
-
-<%= link_to 'Edit', edit_unity_subtype_path(@unity_subtype) %> |
-<%= link_to 'Back', unity_subtypes_path %>
+<div class='box'>
+<div class='box-content'>
+<div class='row-fluid'>
+    <div class='tabbable tabs-left'>
+        <div>
+            <h4 class="ajusted-title"><%= link_to '< Equipment', unity_subtypes_path, :class=>'title-link-color' %></h4>
+            <hr class='title-line'></hr>
+        </div>   
+        <!--START TABS FOR ADMIN EQUIPMENT-->
+        <ul class='nav nav-tabs anchor-tab'>
+            <li class='active'>
+                <a data-toggle='tab' href='#lA'>
+                    <i class="icon-indent-left"></i>                                   
+                    Editar
+                </a>
+            </li>
+            
+            <li>
+                <a data-toggle='tab' href='#lC'>
+                    <i class="icon-indent-left"></i>                                    
+                    Equipos
+                </a>
+            </li>                            
+        </ul>
+        <!--END TABS FOR ADMIN EQUIPMENT-->
+        <!--START CONTENT FOR ADMIN EQUIPMENT-->
+        <div class='tab-content'>
+            <div class='tab-pane active' id='lA'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div> 
+                            <strong class='title'>EDITAR: <%= ' ' + @unity_subtype.subtype %></strong>
+                            </div>    
+                        </div>
+                        <fieldset>                    
+                            <%= render 'form' %>
+                        </fieldset>  
+                    </div>
+                </div> 
+            </div>
+           
+            <div class='tab-pane' id='lC'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div> 
+                                <strong class='title'> 
+                                EQUIPOS DE: <%= ' ' + @unity_subtype.subtype %>
+                                </strong>
+                            </div>    
+                        </div>
+                        <br/>
+                        <fieldset>
+                            <%= render 'addequipment' %>        
+                            <%= render 'equipment' %>
+                        </fieldset>  
+                    </div>
+                </div>                               
+            </div>
+        </div>
+        <!--END CONTENT FOR ADMIN EQUIPMENT-->
+    </div>
+</div>
+</div>
+</div>

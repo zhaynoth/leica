@@ -97,10 +97,12 @@ ActiveRecord::Schema.define(version: 20150815212305) do
   create_table "unities", force: true do |t|
     t.string   "unity"
     t.integer  "unity_subtype_id"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "unities", ["project_id"], name: "unities_project_id_fk", using: :btree
   add_index "unities", ["unity_subtype_id"], name: "unities_unity_subtype_id_fk", using: :btree
 
   create_table "unity_subtypes", force: true do |t|
@@ -113,7 +115,7 @@ ActiveRecord::Schema.define(version: 20150815212305) do
   add_index "unity_subtypes", ["unity_types_id"], name: "unity_subtypes_unity_types_id_fk", using: :btree
 
   create_table "unity_types", force: true do |t|
-    t.string "type"
+    t.string "type_name"
   end
 
   create_table "users", force: true do |t|
@@ -167,6 +169,7 @@ ActiveRecord::Schema.define(version: 20150815212305) do
   add_foreign_key "swatenttions", "types", name: "swatenttions_type_id_fk"
   add_foreign_key "swatenttions", "unities", name: "swatenttions_unity_id_fk"
 
+  add_foreign_key "unities", "projects", name: "unities_project_id_fk"
   add_foreign_key "unities", "unity_subtypes", name: "unities_unity_subtype_id_fk"
 
   add_foreign_key "unity_subtypes", "unity_types", name: "unity_subtypes_unity_types_id_fk", column: "unity_types_id"

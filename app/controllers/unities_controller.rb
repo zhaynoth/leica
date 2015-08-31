@@ -24,12 +24,15 @@ class UnitiesController < ApplicationController
   # POST /unities
   # POST /unities.json
   def create
-    @unity = Unity.new(unity_params)
+      
+    @unity_subtype = UnitySubtype.find(params[:unity_subtype_id])
+    @unity = @unity_subtype.unity.new(unity_params)
 
     respond_to do |format|
       if @unity.save
+        @project = @unity.project        
         format.html { redirect_to @unity, notice: 'Unity was successfully created.' }
-        format.json { render :show, status: :created, location: @unity }
+        format.json { render :show, status: :created, location: @unity.unity_subtype }
       else
         format.html { render :new }
         format.json { render json: @unity.errors, status: :unprocessable_entity }
@@ -57,7 +60,7 @@ class UnitiesController < ApplicationController
     @unity.destroy
     respond_to do |format|
       format.html { redirect_to unities_url, notice: 'Unity was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render :unitydeleted, status: :ok }
     end
   end
 
@@ -69,6 +72,6 @@ class UnitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unity_params
-      params.require(:unity).permit(:unity, :unity_subtype_id)
+      params.require(:unity).permit(:unity, :unity_subtype_id, :project_id)
     end
 end

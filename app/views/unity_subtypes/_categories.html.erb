@@ -1,0 +1,21 @@
+<table class='data-table table table-bordered table-striped table-condensed' style='margin-bottom:0;'>
+  <thead>
+    <tr>
+      <th>Categoría</th>
+      <th>EQ's</th>
+      <th style="width: 30px;"></th>
+      <th style="width: 30px;"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |ca| %>
+      <tr>
+        <td><%= ca.subtype %></td>
+        <td><%= ca.unity.count %></td>
+        <td><%= link_to 'Seleccionar', ca, class: "btn btn-mini btn-primary" %></td>
+        <td><%= link_to 'Eliminar', ca, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,27 +1,82 @@
-<h1>Listing unity_subtypes</h1>
+<div class='box'>        
+<div class='box-content'>
+<div class='row-fluid'>       
+    <div class='tabbable tabs-left'>
+        <div>            
+            <h4 class="ajusted-title"> Equipment </h4>
+            <hr class='title-line'></hr>
+        </div>                       
+        <!--START TABS FOR ADMIN EQUIPMENT-->
+        <ul class='nav nav-tabs anchor-tab'>
+            <li class='active'>
+                <a data-toggle='tab' href='#lA'>
+                    <i class="icon-indent-left"></i>                                    
+                    Nuevo  
+                </a>
+            </li>
 
-<table>
-  <thead>
-    <tr>
-      <th>Subtype</th>
-      <th>Unity type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @unity_subtypes.each do |unity_subtype| %>
-      <tr>
-        <td><%= unity_subtype.subtype %></td>
-        <td><%= unity_subtype.unity_type_id %></td>
-        <td><%= link_to 'Show', unity_subtype %></td>
-        <td><%= link_to 'Edit', edit_unity_subtype_path(unity_subtype) %></td>
-        <td><%= link_to 'Destroy', unity_subtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Unity subtype', new_unity_subtype_path %>
+            <li>
+                <a data-toggle='tab' href='#lB'>
+                    <i class="icon-indent-left"></i>                                   
+                    Equipos Campo
+                </a>
+            </li>
+            
+            <li>
+                <a data-toggle='tab' href='#lC'>
+                    <i class="icon-indent-left"></i>                                    
+                    Equipos Software
+                </a>
+            </li>
+        </ul>
+        <!--END TABS FOR ADMIN EQUIPMENT-->
+        <!--START CONTENT FOR ADMIN EQUIPMENT-->
+        <div class='tab-content'>
+            <div class='tab-pane active' id='lA'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div class='title'><strong>NUEVO MODELO/CATEGORIA</strong></div>                               
+                        </div>
+                        <fieldset>                    
+                                <%= render 'form' %>
+                        </fieldset>                     
+                    </div>
+                </div>                                
+            </div>
+        
+            <div class='tab-pane' id='lB'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div class='title'><strong>MODELOS (Campo)</strong></div>                        
+                        </div>
+                        <fieldset>
+                            <div style="width: 55%;">
+                                <%= render 'models' %>
+                            </div> 
+                        </fieldset>
+                    </div>
+                </div>                                
+            </div>
+           
+            <div class='tab-pane' id='lC'>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box green-border'>
+                        <div class='box-header box-header-small green-background'>
+                            <div class='title'><strong><caption>CATEGORIAS (Software)</caption></strong></div>
+                        </div>
+                        <fieldset> 
+                            <div style="width: 55%;"> 
+                                <%= render 'categories' %>                         
+                            </div>                   
+                        </fieldset>  
+                    </div>
+                </div>                                                             
+            </div>
+        </div>
+        <!--END CONTENT FOR ADMIN EQUIPMENT-->
+    </div>             
+</div>
+</div>
+</div>

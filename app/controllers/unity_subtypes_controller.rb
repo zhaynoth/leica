@@ -1,5 +1,6 @@
 class UnitySubtypesController < ApplicationController
   before_action :set_unity_subtype, only: [:show, :edit, :update, :destroy]
+  before_action :set_methods_for_index, only: [:index, :create]
 
   # GET /unity_subtypes
   # GET /unity_subtypes.json
@@ -14,7 +15,6 @@ class UnitySubtypesController < ApplicationController
 
   # GET /unity_subtypes/new
   def new
-    @unity_subtype = UnitySubtype.new
   end
 
   # GET /unity_subtypes/1/edit
@@ -28,10 +28,10 @@ class UnitySubtypesController < ApplicationController
 
     respond_to do |format|
       if @unity_subtype.save
-        format.html { redirect_to @unity_subtype, notice: 'Unity subtype was successfully created.' }
+        format.html { redirect_to unity_subtypes_url, notice: 'Unity subtype was successfully created.' }
         format.json { render :show, status: :created, location: @unity_subtype }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @unity_subtype.errors, status: :unprocessable_entity }
       end
     end
@@ -65,10 +65,21 @@ class UnitySubtypesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_unity_subtype
       @unity_subtype = UnitySubtype.find(params[:id])
+      @equipment = @unity_subtype.unity
+      $projects = Project.all
+      $unity_types = UnityType.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unity_subtype_params
-      params.require(:unity_subtype).permit(:subtype, :unity_type_id)
+      params.require(:unity_subtype).permit(:subtype, :unity_types_id)
     end
+        # EXTRA PRIVATE METHODS
+    def set_methods_for_index
+      @categories = UnitySubtype.where(:unity_types_id => 1)
+      @model = UnitySubtype.where(:unity_types_id => 2)
+      @unity_subtype = UnitySubtype.new     
+      $unity_types = UnityType.all
+    end
+
 end
