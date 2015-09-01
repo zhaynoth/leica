@@ -28,17 +28,19 @@ Rails.application.routes.draw do
   end
 
   resources :swatenttions do
-    resource :attentions
+    resource :attentions 
     member do
       post 'send_report'
     end
   end
 
   post 'sendrep' => 'swatenttions#send_report'
-  post 'closerep' => 'attentions#close_report'    
-
 
   get 'attentions' => 'attentions#index'
+  post 'closerep' => 'attentions#close_report'    
+  get 'download' => 'attentions#download_report'
+
+
 
   resources :types 
   resources :guards  

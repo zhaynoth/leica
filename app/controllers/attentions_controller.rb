@@ -1,6 +1,6 @@
 class AttentionsController < ApplicationController
   # before_action :set_attention, only: [:show, :edit, :update, :destroy]
-  before_action :set_methods_for_reports, only:[:index, :create]
+  before_action :set_methods_for_reports, only:[:index, :create, :download_report]
   helper_method :get_responsible, :get_type_valor
   # GET /attentions
   # GET /attentions.json
@@ -55,7 +55,7 @@ class AttentionsController < ApplicationController
 
   # DELETE /attentions/1
   # DELETE /attentions/1.json
-   def destroy
+  def destroy
     @attention.destroy
     respond_to do |format|
       format.html { redirect_to attentions_url, notice: 'Attention was successfully destroyed.' }
@@ -80,6 +80,7 @@ class AttentionsController < ApplicationController
     @type_valor = Type.find(typ_id)
     @type_valor.valor
   end
+
   def close_report
     @send_attentions = Attention.where(:report => 'send')
     respond_to do |format|
@@ -87,6 +88,54 @@ class AttentionsController < ApplicationController
       format.html { redirect_to attentions_url, notice: 'Reporte cerrado con éxito.' }
       format.json { head :no_content }
     end      
+  end
+
+  def download_report
+    package = Axlsx::Package.new
+    workbook = package.workbook
+   
+    workbook.add_worksheet(name: "Software Report") do |sheet|
+      
+      heading = sheet.styles.add_style(alignment: {horizontal: :center}, b: true, sz: 10, bg_color: "DA4F49", fg_color: "FF")
+      
+      sheet.add_row ["Issue", 
+                     "Mina", 
+                     "Reported by", 
+                     "Equipment", 
+                     "Category", 
+                     "Type",
+                     "Status",
+                     "Priority",
+                     "Asigned To",
+                     "Workers",
+                     "Comment",
+                     "Created",
+                     "Done",
+                     "HH",
+                     "H.Hom",
+                     "Users"], :style => heading
+      @send_attentions.each do |sa| 
+        sheet.add_row [sa.swatenttion.issue,
+                       sa.contract.project.nombre,
+                       sa.reportby, 
+                       sa.swatenttion.unity.unity,
+                       sa.swatenttion.unity.unity_subtype.subtype, 
+                       get_type_valor(sa.swatenttion.type_id),
+                       sa.type.valor,
+                       get_type_valor(sa.swatenttion.priority),
+                       get_responsible(sa.involved).nombre,
+                       sa.involved.count(),
+                       sa.swatenttion.comment,
+                       sa.dateinc,
+                       sa.datefin,
+                       sa.horas,
+                       sa.horashombre,
+                       sa.user.email]
+      end
+    end
+    datatimereport = Time.parse(DateTime.now.to_s)
+    package.serialize('reportsw.xlsx')
+    send_file("#{Rails.root}/reportsw.xlsx", filename: "Report SW - #{datatimereport}.xlsx", type: "application/vnd.ms-excel")
   end
 
   private
@@ -105,7 +154,10 @@ class AttentionsController < ApplicationController
     #flag to set report close
     @flag_att = Attention.new
     @send_attentions = Attention.where(:report => 'send')
-    @close_attentions = Attention.where(:report => 'close')
+    @close_attentions = Attention.where(:report => 'close')  
   end
 
 end
+
+        
+#
