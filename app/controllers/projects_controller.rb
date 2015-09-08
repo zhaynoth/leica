@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_methods_for_form, only:[:index, :create]
+  before_action :get_permission_level
 
   # GET /projects
   # GET /projects.json
@@ -59,7 +60,13 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def get_permission_level    
+    if current_user.permission_level != 'Admin' 
+      respond_to do |format|
+          format.html { redirect_to  root_path, notice: 'Permisos no válidos' }
+      end
+    end
+  end
 # ---------------START EXTRA METHODS----------------
 # ---------------END EXTRA METHODS----------------
 

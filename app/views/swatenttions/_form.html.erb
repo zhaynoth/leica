@@ -33,12 +33,12 @@
     
         <div class="span2 out-margin">
           <%= f.label :issue, "Issue", :class => 'link form-box form-label' %>
-          <%= f.text_area :issue, :class => 'form-txtarea form-input' %>
+          <%= f.text_area :issue, required: true, :class => 'form-txtarea form-input' %>
         </div>  
 
         <div class="span2 out-margin">     
-          <%= label_tag :reportby,  "Reported by", :class => 'form-box form-label' %>
-          <%= text_field_tag "attention[reportby]", :reportby, :class => 'form-box form-input' %>
+          <%= label_tag :reportby, "Reported by", :class => 'form-box form-label' %>
+          <%= text_field_tag "attention[reportby]",nil, required: true, :class => 'form-box form-input' %>
         </div>         
 
         <div class="span1 out-margin">
@@ -73,17 +73,17 @@
 
         <div class="span2 out-margin">
           <%= f.label :comment, "Comment", :class => 'form-box form-label'  %>
-          <%= f.text_area :comment, :class => 'form-txtarea form-input'  %>
+          <%= f.text_area :comment, required: true, :class => 'form-txtarea form-input'  %>
         </div>   
         <div class="span3 out-margin">  
           <div class="span6 ">     
             <%= label_tag :dateinc, "Created", :class => 'form-box form-label' %>
-            <input id="attention_dateinc" name="attention[dateinc]" type='text' class="form-control form-box form-input"/>
+            <input id="attention_dateinc" name="attention[dateinc]" type='text' required class="form-control form-box form-input"/>
           </div>
 
           <div class="span6 out-margin">     
             <%= f.label :datefin, "Done", :class => 'form-box form-label' %>
-            <input id="attention_datefin" name="attention[datefin]" type='text' class="form-control form-box form-input"/>
+            <input id="attention_datefin" name="attention[datefin]" type='text' required class="form-control form-box form-input"/>
           </div>
         </div>    
       </div>
@@ -116,7 +116,7 @@
 $(function () {
     /*---Start DateTimePicker---*/
      $('#attention_dateinc').datetimepicker({
-            format: 'MMM DD YYYY, h:mm',
+            format: 'MMM DD YYYY, H:mm',
             icons: {
                 time: "icon-time",
                 date: "icon-calendar",
@@ -128,7 +128,7 @@ $(function () {
         });
 
         $('#attention_datefin').datetimepicker({
-            format: 'MMM DD YYYY, h:mm',
+            format: 'MMM DD YYYY, H:mm',
             icons: {
                 time: "icon-time",
                 date: "icon-calendar",

@@ -17,11 +17,12 @@
 		<div class="box-content">
 			<ul class="unstyled">
 			  <li class="nav-header">Registro de Atenciones</li>
-              <li><a href="#"> Soporte Diario Software</a></li>
+              <li><%= link_to 'Soporte Software', swatenttions_path %></li>
       		  <li><a href="#"> Soporte Diario Campo</a></li>
 			</ul>
 		</div>
 	</div>
+	<% if current_user.permission_level == 'Admin' %>
 	<div class="span4 box box-nomargin">
 		<div class="box-header green-background">
 			<div class="title"><i class="icon-list-alt"></i> Reportes</div>		 	
@@ -29,7 +30,7 @@
 		<div class="box-content">
 			<ul class="unstyled">
               <li class="nav-header">Peporte Atenciones</li>
-              <li><%= link_to 'Soporte Software',swatenttions_path %></li>
+              <li><%= link_to 'Reportes Software', attentions_path %></li>
       		  <li><a href="#"> Soporte Campo</a></li>      		  
 			</ul>
 		</div>
@@ -40,19 +41,18 @@
 		</div>
 		<div class="box-content">
 			<ul class="unstyled">
-              <li class="nav-header">Proyectos / Operaciones</li>              
+              <li class="nav-header">Proyectos / Operaciones - Contratos</li>              
               <li><%= link_to 'Proyectos y Contratos', projects_path %></li>
        		  <hr class="hr-bottom">
-              <li class="nav-header">Trabajadores</li>
+              <li class="nav-header">Trabajadores - Asignación de Contratos</li>
   			  <li><%= link_to 'Registrar Trabajadores', workers_path %></li> 
               <hr class="hr-bottom">
-              <li class="nav-header">Atenciones</li>
-              <li><a href="#"> Atenciones General</a></li>
-              <li><a href="#"> Atenciones Software</a></li>
-              <li><a href="#"> Atenciones Campo</a></li>
+              <li class="nav-header">Equipos - Flotas(Modelos) - Categorías</li>
+              <li><li><%= link_to 'Equipment', unity_subtypes_path %></li></li>
 			</ul>
 		</div>
-	</div>				
+	</div>
+	<% end %>				
 </div>
 
 <% end %>

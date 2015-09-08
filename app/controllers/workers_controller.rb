@@ -1,6 +1,7 @@
 class WorkersController < ApplicationController
   before_action :set_worker, only: [:contract_add, :show, :edit, :update, :destroy]
   before_action :set_cargos, only: [:index, :show]
+  before_action :get_permission_level
    
   # GET /workers
   # GET /workers.json
@@ -147,6 +148,14 @@ class WorkersController < ApplicationController
         @flag = {:msaje => @rowid}
         format.html { redirect_to @worker }
         format.json { render :econtracts, status: :ok, location: @worker }
+      end
+    end
+  end
+
+  def get_permission_level    
+    if current_user.permission_level != 'Admin' 
+      respond_to do |format|
+          format.html { redirect_to  root_path, notice: 'Permisos no válidos' }
       end
     end
   end

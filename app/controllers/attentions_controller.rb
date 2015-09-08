@@ -2,6 +2,7 @@ class AttentionsController < ApplicationController
   # before_action :set_attention, only: [:show, :edit, :update, :destroy]
   before_action :set_methods_for_reports, only:[:index, :create, :download_report]
   helper_method :get_responsible, :get_type_valor
+  before_action :get_permission_level
   # GET /attentions
   # GET /attentions.json
   def index
@@ -136,6 +137,15 @@ class AttentionsController < ApplicationController
     datatimereport = Time.parse(DateTime.now.to_s)
     package.serialize('reportsw.xlsx')
     send_file("#{Rails.root}/reportsw.xlsx", filename: "Report SW - #{datatimereport}.xlsx", type: "application/vnd.ms-excel")
+  end
+
+
+  def get_permission_level    
+    if current_user.permission_level != 'Admin' 
+      respond_to do |format|
+          format.html { redirect_to  root_path, notice: 'Permisos no válidos' }
+      end
+    end
   end
 
   private

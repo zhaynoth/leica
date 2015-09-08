@@ -16,28 +16,28 @@
             <div class="control-group">
                 <label class="control-label">Nombres</label>
                 <div class="controls">
-                    <%= f.text_field :nombre, :class => 'span12' %>
+                    <%= f.text_field :nombre, required: true, :class => 'span12' %>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Apellidos</label>
                 <div class="controls">
-                    <%= f.text_field :apellido, :class => 'span12' %>
+                    <%= f.text_field :apellido, required: true, :class => 'span12' %>
                 </div>
             </div>
             <hr>
             <div class="control-group">
                 <label class="control-label">Fotocheck</label>
                 <div class="controls">
-                    <%= f.text_field :fotocheck, :class => 'span12' %>
+                    <%= f.text_field :fotocheck, required: true, :class => 'span12' %>
                 </div>
             </div>
         </div>
         <div class="span6">
             <div class="control-group">
-                <label class="control-label">Teléfono</label>
+                <label class="control-label">Teléfono (xxx-xxx-xxx)</label>
                 <div class="controls">
-                    <%= f.text_field :telefono, :class => 'span12' %>                                                  
+                    <%= f.text_field :telefono, :class => 'span12', :type => 'tel', :pattern => '^\d{3}-\d{3}-\d{3}$' %>                                                  
                 </div>
             </div>
             <div class="control-group">
@@ -91,7 +91,7 @@
             <div class="control-group">
                 <label class="control-label">Username (Email)</label>
                 <div class="controls">
-                    <%= email_field_tag "workeruser[email]", 'email@example.com', class: 'span12', autocomplete: 'off' %>
+                    <%= email_field_tag "workeruser[email]", 'e-mail', autocomplete: 'off', required: true, placeholder: 'email@example.com', class: 'span12' %>
                 </div>
             </div>
             <div class="control-group">

@@ -5,8 +5,8 @@ class CreateAttentions < ActiveRecord::Migration
       t.datetime :dateinc
       t.datetime :datefin
       t.integer :type_id, index: true
-      t.float :horas
-      t.float :horashombre
+      t.float :horas, precision: 2, scale: 2
+      t.float :horashombre, precision: 2, scale: 2
       t.integer :contract_id, index: true
       t.string :report
       t.belongs_to :user, index: true

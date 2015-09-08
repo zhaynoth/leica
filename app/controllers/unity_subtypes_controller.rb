@@ -1,7 +1,8 @@
 class UnitySubtypesController < ApplicationController
   before_action :set_unity_subtype, only: [:show, :edit, :update, :destroy]
   before_action :set_methods_for_index, only: [:index, :create]
-
+  before_action :get_permission_level
+  
   # GET /unity_subtypes
   # GET /unity_subtypes.json
   def index
@@ -58,6 +59,14 @@ class UnitySubtypesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to unity_subtypes_url, notice: 'Unity subtype was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def get_permission_level    
+    if current_user.permission_level != 'Admin' 
+      respond_to do |format|
+          format.html { redirect_to  root_path, notice: 'Permisos no válidos' }
+      end
     end
   end
 

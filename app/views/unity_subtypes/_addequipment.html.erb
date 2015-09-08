@@ -1,15 +1,16 @@
-<div class="span7"> 
+<div class="span8"> 
   <div class="control-group">
     <%= form_for([@unity_subtype, Unity.new], remote: :true, html: { :"data-type" => "json" }) do |f| %>
       <strong class: "span3">NUEVO EQUIPO</strong>
-        <%= f.text_field :unity, :class => 'span4 out-margin' %>
+        <%= f.text_field :unity, required: true, :class => 'span3 out-margin' %>
+      <strong class: "span3">Proyecto</strong>
         <%= f.collection_select(:project_id, $projects, :id, :nombre, {}, 
                       {:class => "span4 out-margin"}) %>
         <%= f.submit 'Crear', :class=> 'span2 btn btn-small btn-primary' %>
     <% end %>
   </div>
 </div>
-<div class="span5">
+<div class="span4">
   <% if notice != nil %>
     <div id="content-notice" class="span6"> 
       <!-- Place for notices -->
